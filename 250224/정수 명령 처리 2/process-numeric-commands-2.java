@@ -14,7 +14,7 @@ public class Main {
 
 			switch (split[0]) {
 				case "push":
-					queue.add(Integer.parseInt(split[0]));
+					queue.add(Integer.parseInt(split[1]));
 					break;
 				case "pop":
 					System.out.println(queue.poll());
