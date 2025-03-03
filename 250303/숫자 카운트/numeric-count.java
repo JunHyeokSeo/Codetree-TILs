@@ -16,8 +16,8 @@ public class Main {
 
 		int cnt = 0;
 		for (int i = 1; i < 9; i++) {
-			for (int j = 1; j < 9; j++) {
-				for (int k = 1; k < 9; k++) {
+			for (int j = 2; j < 9; j++) {
+				for (int k = 3; k < 9; k++) {
 					if (i == j && j == k)
 						continue;
 
