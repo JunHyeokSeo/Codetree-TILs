@@ -1,14 +1,12 @@
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int M = sc.nextInt();
-		Set<Integer> setA;
-		Set<Integer> setB = new HashSet<>();
+		Map<Integer, Integer> mapA;
+		Map<Integer, Integer> mapB = new HashMap<>();
 
 		int[] A = new int[N];
 		for (int i = 0; i < N; i++) {
@@ -16,16 +14,16 @@ public class Main {
 		}
 
 		for (int i = 0; i < M; i++) {
-			setB.add(sc.nextInt());
+			mapB.put(sc.nextInt(), 0);
 		}
 
 		int cnt = 0;
 		for (int i = 0; i <= N - M; i++) {
-			setA = new HashSet<>();
+			mapA = new HashMap<>();
 			for (int j = i; j < i + M; j++) {
-				setA.add(A[j]);
+				mapA.put(mapA.get(A[j]), mapA.get(A[j]) == null ? 0 : mapA.get(A[j]) + 1);
 			}
-			if (setA.equals(setB))
+			if (mapA.equals(mapB))
 				cnt++;
 		}
 
