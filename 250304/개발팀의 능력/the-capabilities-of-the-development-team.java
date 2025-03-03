@@ -22,7 +22,7 @@ public class Main {
 						int bAbility = arr[k] + arr[l];
 						int cAbility = totAbility - (aAbility + bAbility);
 
-						if (aAbility == bAbility && bAbility == cAbility)
+						if (aAbility == bAbility || bAbility == cAbility || aAbility == cAbility)
 							continue;
 
 						int max = Math.max(Math.max(aAbility, bAbility), cAbility);
