@@ -12,8 +12,8 @@ public class Main {
 		}
 
 		int maxSize = 0;
-		for (int i = 0; i <= 5; i++) {
-			for (int j = i; j <= 5; j++) {
+		for (int i = 0; i <= 100; i++) {
+			for (int j = i; j <= 100; j++) {
 				boolean onlyHasGorH = true;
 				int gCnt = 0;
 				int hCnt = 0;
