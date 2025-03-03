@@ -14,7 +14,6 @@ public class Main {
 		int maxSize = 0;
 		for (int i = 0; i <= 100; i++) {
 			for (int j = i; j <= 100; j++) {
-				boolean onlyHasGorH = true;
 				int gCnt = 0;
 				int hCnt = 0;
 				int left = Integer.MAX_VALUE;
@@ -22,7 +21,6 @@ public class Main {
 				for (int k = i; k <= j; k++) {
 					String str = arr[k];
 					if (str == null) {
-						onlyHasGorH = false;
 						continue;
 					}
 
@@ -35,7 +33,7 @@ public class Main {
 					right = Math.max(right, k);
 				}
 
-				if (onlyHasGorH || (gCnt == hCnt && gCnt != 0))
+				if ((gCnt == hCnt && gCnt != 0) || (gCnt != hCnt && (gCnt == 0 || hCnt == 0)))
 					maxSize = Math.max(maxSize, right - left);
 			}
 		}
