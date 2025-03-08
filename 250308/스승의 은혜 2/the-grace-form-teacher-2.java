@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
@@ -9,22 +10,21 @@ public class Main {
 			p[i] = sc.nextInt();
 		}
 
+		Arrays.sort(p);
+
 		int maxCnt = 0;
+		int tmpB = b;
 		for (int i = 0; i < n; i++) {
-			int cnt = 0;
-			int tmpB = b;
-			for (int j = 0; j < n; j++) {
-				tmpB -= p[j];
+			int tmpP = p[i];
 
-				if (i == j)
-					tmpB += (p[j] / 2);
+			if (tmpB - tmpP < 0)
+				tmpP /= 2;
 
-				if (tmpB < 0)
-					break;
+			if (tmpB - tmpP < 0)
+				break;
 
-				cnt++;
-			}
-			maxCnt = Math.max(maxCnt, cnt);
+			maxCnt++;
+			tmpB -= tmpP;
 		}
 
 		System.out.println(maxCnt);
