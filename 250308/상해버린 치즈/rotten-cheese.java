@@ -31,7 +31,10 @@ public class Main {
 					continue;
 
 				//아픈 시점까지 사람이 먹은 치즈 구하기
-				for (int k = 1; k <= j; k++) {
+				for (int k = 1; k < j; k++) {
+					if (arrD[i][k] == 0)
+						continue;
+					
 					arrM[arrD[i][k]] = 1;
 				}
 			}
@@ -42,10 +45,8 @@ public class Main {
 		for (int i = 1; i <= N; i++) {
 			int midCnt = 0;
 			for (int j = 1; j <= 100; j++) {
-				for (int k = 1; k <= M; k++) {
-					if (arrD[i][j] == arrM[k])
-						midCnt++;
-				}
+				if (arrM[arrD[i][j]] >= 1)
+					midCnt++;
 			}
 
 			if (midCnt > 0)
