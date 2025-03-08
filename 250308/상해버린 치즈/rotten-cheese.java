@@ -45,6 +45,8 @@ public class Main {
 
 				if (sp == dp && dt < st)
 					arrM[dm] += 1;
+				else
+					arrM[dm] = 0;
 			}
 		}
 
@@ -56,7 +58,7 @@ public class Main {
 				if (arrDP[j] != i)
 					continue;
 
-				if (arrM[arrDM[j]] >= S)
+				if (arrM[arrDM[j]] != 0)
 					midCnt++;
 			}
 
