@@ -56,7 +56,7 @@ public class Main {
 				if (arrDP[j] != i)
 					continue;
 
-				if (arrM[arrDM[j]] == S)
+				if (arrM[arrDM[j]] >= S)
 					midCnt++;
 			}
 
