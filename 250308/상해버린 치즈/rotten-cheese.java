@@ -6,50 +6,56 @@ public class Main {
 		int M = sc.nextInt();
 		int D = sc.nextInt();
 		int S = sc.nextInt();
-		int[][] arrD = new int[N + 1][101];
-		int[][] arrS = new int[N + 1][101];
-		int[] arrM = new int[M + 1];
 
-		for (int i = 0; i < D; i++) {
+		int[] arrM = new int[M + 1];
+		int[] arrDP = new int[D + 1];
+		int[] arrDM = new int[D + 1];
+		int[] arrDT = new int[D + 1];
+		int[] arrSP = new int[S + 1];
+		int[] arrST = new int[S + 1];
+
+		for (int i = 1; i <= D; i++) {
 			int p = sc.nextInt();
 			int m = sc.nextInt();
 			int t = sc.nextInt();
 
-			arrD[p][t] = m;
+			arrDP[i] = p;
+			arrDM[i] = m;
+			arrDT[i] = t;
 		}
-		for (int i = 0; i < S; i++) {
+
+		for (int i = 1; i <= S; i++) {
 			int p = sc.nextInt();
 			int t = sc.nextInt();
 
-			arrS[p][t] = 1;
+			arrSP[i] = p;
+			arrST[i] = t;
 		}
 
 		// 아픈사람 찾기
-		for (int i = 1; i <= N; i++) {
-			for (int j = 1; j <= 100; j++) {
-				if (arrS[i][j] == 0)
-					continue;
+		for (int i = 1; i <= S; i++) {
+			int p = arrSP[i];
+			int t = arrST[i];
 
-				//아픈 시점까지 사람이 먹은 치즈 구하기
-				for (int k = 1; k < j; k++) {
-					if (arrD[i][k] == 0)
-						continue;
-					
-					arrM[arrD[i][k]] = 1;
-				}
+			// 아픈 사람이 먹은 치즈 찾기
+			for (int j = 1; j < t; j++) {
+				arrM[arrDM[j]] = 1;
 			}
 		}
 
-		//치즈 먹은 모든 사람 구하기
+		//아픈 치즈 먹은 모든 사람 검거
 		int cnt = 0;
 		for (int i = 1; i <= N; i++) {
 			int midCnt = 0;
-			for (int j = 1; j <= 100; j++) {
-				if (arrM[arrD[i][j]] >= 1)
+			for (int j = 1; j <= D; j++) {
+				if (arrDP[j] != i)
+					continue;
+
+				if (arrM[arrDM[j]] == 1)
 					midCnt++;
 			}
 
-			if (midCnt > 0)
+			if (midCnt >= 1)
 				cnt++;
 		}
 
