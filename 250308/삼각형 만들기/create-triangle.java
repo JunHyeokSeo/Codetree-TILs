@@ -10,7 +10,7 @@ public class Main {
 			y[i] = sc.nextInt();
 		}
 
-		int ans = 0;
+		int ans = Integer.MIN_VALUE;
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) {
 				for (int k = j + 1; k < n; k++) {
@@ -20,7 +20,7 @@ public class Main {
 					int maxY = Math.max(Math.max(y[i], y[j]), y[k]);
 
 					if ((x[i] == x[j] || x[j] == x[k] || x[k] == x[i]) && (y[i] == y[j] || y[j] == y[k] || y[k] == y[i]))
-						ans = Math.abs(maxX - minX) * Math.abs(maxY - minY);
+						ans = Math.max(ans, Math.abs(maxX - minX) * Math.abs(maxY - minY));
 				}
 			}
 		}
