@@ -44,7 +44,7 @@ public class Main {
 				int dt = arrDT[j];
 
 				if (sp == dp && dt < st)
-					arrM[dm] = 1;
+					arrM[dm] += 1;
 			}
 		}
 
@@ -56,7 +56,7 @@ public class Main {
 				if (arrDP[j] != i)
 					continue;
 
-				if (arrM[arrDM[j]] == 1)
+				if (arrM[arrDM[j]] == S)
 					midCnt++;
 			}
 
