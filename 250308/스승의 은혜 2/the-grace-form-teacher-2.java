@@ -12,13 +12,14 @@ public class Main {
 		int maxCnt = 0;
 		for (int i = 0; i < n; i++) {
 			int cnt = 0;
+			int tmpB = b;
 			for (int j = 0; j < n; j++) {
-				b = b - p[j];
+				tmpB -= p[j];
 
 				if (i == j)
-					b = b + (p[j] / 2);
+					tmpB += (p[j] / 2);
 
-				if (b < 0)
+				if (tmpB < 0)
 					break;
 
 				cnt++;
