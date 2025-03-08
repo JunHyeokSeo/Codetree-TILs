@@ -34,12 +34,17 @@ public class Main {
 
 		// 아픈사람 찾기
 		for (int i = 1; i <= S; i++) {
-			int p = arrSP[i];
-			int t = arrST[i];
+			int sp = arrSP[i];
+			int st = arrST[i];
 
 			// 아픈 사람이 먹은 치즈 찾기
-			for (int j = 1; j < t; j++) {
-				arrM[arrDM[j]] = 1;
+			for (int j = 1; j <= D; j++) {
+				int dp = arrDP[j];
+				int dm = arrDM[j];
+				int dt = arrDT[j];
+
+				if (sp == dp && dt < st)
+					arrM[dm] = 1;
 			}
 		}
 
