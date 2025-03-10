@@ -15,19 +15,15 @@ public class Main {
 		}
 
 		// 결과 저장
+        int cnt = 0;
 		for (int i = 0; i < k; i++) {
 			for (int j = 0; j < n; j++) {
 				for (int l = j + 1; l < n; l++) {
 					arrR[arr[i][j]][arr[i][l]]++;
+
+                    if (arrR[i][j] == k)
+					    cnt++;
 				}
-			}
-		}
-		
-		int cnt = 0;
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				if (arrR[i][j] == k)
-					cnt++;
 			}
 		}
 
