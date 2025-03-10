@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
@@ -50,6 +51,10 @@ public class Main {
 		//아픈 치즈 먹은 모든 사람 검거
 		int maxCnt = 0;
 		for (int m = 1; m <= M; m++) {
+			//아픈 사람이 전부 먹은 치즈가 아니면 제외
+			if (arrM[m] != S)
+				continue;
+
 			int[] arrP = new int[N + 1];
 
 			//먹은 기록 봐가면서 먹은 사람 기록 - 중복 없이
