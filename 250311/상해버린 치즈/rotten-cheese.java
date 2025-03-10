@@ -48,11 +48,16 @@ public class Main {
 			}
 		}
 
+		int maxCheessCnt = 0;
+		for (int m = 1; m <= M; m++) {
+			maxCheessCnt = Math.max(maxCheessCnt, arrM[m]);
+		}
+
 		//아픈 치즈 먹은 모든 사람 검거
 		int maxCnt = 0;
 		for (int m = 1; m <= M; m++) {
 			//아픈 사람이 전부 먹은 치즈가 아니면 제외
-			if (arrM[m] != S)
+			if (arrM[m] != maxCheessCnt)
 				continue;
 
 			int[] arrP = new int[N + 1];
