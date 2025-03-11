@@ -20,24 +20,19 @@ public class Main {
 					if (i == j || j == k || k == i)
 						continue;
 
-					r = new int[101];
-					for (int l = 0; l < n; l++) {
+					boolean success = true;
+					for (int l = 0; l < n - 1; l++) {
 						if (l == i || l == j || l == k)
 							continue;
 
-						for (int m = a[l]; m <= b[l]; m++) {
-							r[m] += 1;
+						if (b[l] < a[l + 1] || b[l + 1] < a[l]) {
+							success = false;
+							break;
 						}
 					}
 
-					int max = 0;
-					for (int m = 0; m < 101; m++) {
-						max = Math.max(max, r[m]);
-					}
-
-					if (max == 1) {
+					if (success)
 						cnt++;
-					}
 				}
 			}
 		}
