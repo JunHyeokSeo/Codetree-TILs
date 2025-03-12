@@ -23,8 +23,8 @@ public class Main {
 
 		int cnt = 0;
 		for (int i = 0; i < n; i++) {
-			int price = p[i][0];
-			int del = p[i][1];
+			int price = sortedArr[i][0];
+			int del = sortedArr[i][1];
 
 			if (b - (price + del) < 0) {
 				if (b - ((price / 2) + del) >= 0)
