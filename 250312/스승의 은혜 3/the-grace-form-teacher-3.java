@@ -17,7 +17,7 @@ public class Main {
 				                    .sorted(
 											Comparator
 													.comparingInt((int[] row) -> Arrays.stream(row).sum())
-													.thenComparing((int[] row) -> row[0])
+													.thenComparing((int[] row) -> row[0], Comparator.reverseOrder())
 				                    )
 				                    .toArray(int[][]::new);
 
