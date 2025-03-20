@@ -11,7 +11,7 @@ public class Main {
 		}
 
 		int ans = Integer.MAX_VALUE;
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 10000; i++) {
 			boolean success = true;
 			for (int j = 1; j <= n; j++) {
 				int v = (int) (i * Math.pow(2, j));
