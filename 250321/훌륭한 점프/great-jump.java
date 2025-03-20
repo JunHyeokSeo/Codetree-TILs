@@ -19,7 +19,8 @@ public class Main {
 				tmp[cnt++] = j;
 			}
 
-			boolean success = true;
+			boolean success = tmp[0] == 0;
+
 			for (int j = 1; j < cnt; j++) {
 				int diff = Math.abs(tmp[j] - tmp[j - 1]);
 				if (diff > k) {
