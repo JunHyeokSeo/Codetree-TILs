@@ -40,8 +40,6 @@ public class Main {
 				if (tmp8.chars().allMatch(c -> c == ('0' + num1) || c == ('0' + num2))) success = true;
 
 				if (success){
-					System.out.println("i : " + i);
-					System.out.println("j : " + j);
 					cnt++;
 				}
 
