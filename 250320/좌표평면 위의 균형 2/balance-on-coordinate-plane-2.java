@@ -11,41 +11,36 @@ public class Main {
 		}
 
 		int minMax = Integer.MAX_VALUE;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
+		for (int i = 0; i <= 100; i++) {
+			for (int j = 0; j <= 100; j++) {
 				if (i % 2 == 1 || j % 2 == 1)
 					continue;
 
-				int max = 0;
-				int cnt = 0;
+				int cnt1 = 0;
+				int cnt2 = 0;
+				int cnt3 = 0;
+				int cnt4 = 0;
 				for (int k = 0; k < n; k++) {
 					if (x[k] > i && y[k] > j)
-						cnt++;
+						cnt1++;
 				}
-				max = Math.max(max, cnt);
 
-				cnt = 0;
 				for (int k = 0; k < n; k++) {
 					if (x[k] < i && y[k] > j)
-						cnt++;
+						cnt2++;
 				}
-				max = Math.max(max, cnt);
 
-				cnt = 0;
 				for (int k = 0; k < n; k++) {
 					if (x[k] < i && y[k] < j)
-						cnt++;
+						cnt3++;
 				}
-				max = Math.max(max, cnt);
 
-				cnt = 0;
 				for (int k = 0; k < n; k++) {
 					if (x[k] > i && y[k] < j)
-						cnt++;
+						cnt4++;
 				}
-				max = Math.max(max, cnt);
 
-				minMax = Math.min(minMax, max);
+				minMax = Math.min(minMax, Math.max(Math.max(Math.max(cnt1, cnt2), cnt3), cnt4));
 			}
 		}
 
