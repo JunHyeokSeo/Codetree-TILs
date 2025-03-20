@@ -10,7 +10,7 @@ public class Main {
 			b[i] = sc.nextInt();
 		}
 
-		int ans = 0;
+		int ans = Integer.MAX_VALUE;
 		for (int i = 1; i <= 10; i++) {
 			boolean success = true;
 			for (int j = 1; j <= n; j++) {
@@ -23,7 +23,7 @@ public class Main {
 			}
 
 			if (success)
-				ans = i;
+				ans = Math.min(ans, i);
 		}
 
 		System.out.println(ans);
