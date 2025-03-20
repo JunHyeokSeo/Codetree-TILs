@@ -10,7 +10,7 @@ public class Main {
 		}
 
 		int ans = 101;
-		for (int i = n; i >= 1; i--) {
+		for (int i = 100; i >= 1; i--) {
 			int cnt = 0;
 			int[] tmp = new int[n];
 			for (int j = 0; j < n; j++) {
