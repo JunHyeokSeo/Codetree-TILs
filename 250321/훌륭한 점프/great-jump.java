@@ -13,7 +13,7 @@ public class Main {
 			int lastIdx = 0;
 			boolean success = true;
 			for (int j = 0; j < n; j++) {
-				if (arr[j] < i)
+				if (arr[j] > i)
 					continue;
 
 				if (j - lastIdx > k) {
