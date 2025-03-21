@@ -19,7 +19,7 @@ public class Main {
 				tmp[cnt++] = j;
 			}
 
-			boolean success = tmp[0] == 0;
+			boolean success = (tmp[0] == 0 && tmp[cnt - 1] == n - 1);
 
 			for (int j = 1; j < cnt; j++) {
 				int diff = Math.abs(tmp[j] - tmp[j - 1]);
@@ -30,7 +30,7 @@ public class Main {
 			}
 
 			if (!success)
-				break;
+				continue;
 
 			ans = Math.min(ans, i);
 		}
