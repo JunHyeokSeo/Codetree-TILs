@@ -19,6 +19,9 @@ public class Main {
 				tmp[cnt++] = j;
 			}
 
+			if (cnt <= 0)
+				continue;
+			
 			boolean success = (tmp[0] == 0 && tmp[cnt - 1] == n - 1);
 
 			for (int j = 1; j < cnt; j++) {
