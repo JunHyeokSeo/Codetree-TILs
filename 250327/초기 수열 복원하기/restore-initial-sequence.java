@@ -18,7 +18,7 @@ public class Main {
 			}
 
 			Set<Integer> set = Arrays.stream(arr).boxed().collect(Collectors.toSet());
-			if (arr.length == set.size()) {
+			if (arr.length == set.size() && !set.contains(0)) {
 				for (int j = 0; j < n; j++) {
 					System.out.print(arr[j] + " ");
 				}
