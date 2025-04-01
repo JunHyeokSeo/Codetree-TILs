@@ -18,6 +18,9 @@ public class Main {
 					cnt++;
 			}
 
+			if (cnt == 0)
+				continue;
+
 			if (maxCnt < cnt)
 				bomb = bombs[i];
 			else if (maxCnt == cnt)
