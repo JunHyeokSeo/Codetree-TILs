@@ -24,13 +24,10 @@ public class Main {
 			for (int j = 0; j < n; j++) {
 				int hCnt = 0;
 				for (int k = 0; k < n; k++) {
-					if (j == k)
-						continue;
-
 					if (tmp[j] <= tmp[k])
 						hCnt++;
 				}
-				if (tmp[j] == hCnt)
+				if (tmp[j] <= hCnt)
 					ans = Math.max(ans, tmp[j]);
 			}
 		}
