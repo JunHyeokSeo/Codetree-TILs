@@ -14,22 +14,20 @@ public class Main {
 			int[] tmp = Arrays.copyOf(a, a.length);
 			int cnt = 0;
 			for (int j = 0; j < n; j++) {
-				if (i - a[j] == 1 && cnt <= l) {
+				if (i - a[j] == 1 && cnt < l) {
 					cnt++;
 					tmp[j] = i;
 				}
 			}
 
 			// H 탐색
+			int hCnt = 0;
 			for (int j = 0; j < n; j++) {
-				int hCnt = 0;
-				for (int k = 0; k < n; k++) {
-					if (tmp[j] <= tmp[k])
-						hCnt++;
-				}
-				if (tmp[j] <= hCnt)
-					ans = Math.max(ans, tmp[j]);
+				if (i <= tmp[j])
+					hCnt++;
 			}
+			if (i <= hCnt)
+				ans = Math.max(ans, i);
 		}
 
 		System.out.println(ans);
