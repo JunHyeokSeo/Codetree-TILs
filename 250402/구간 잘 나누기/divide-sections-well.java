@@ -8,6 +8,7 @@ public class Main {
 		for (int i = 0; i < n; i++)
 			nums[i] = sc.nextInt();
 
+        int ans = 10000;
 		for (int i = 1; i <= 10000; i++) {
 			boolean isPassable = true;
 			int section = 1;
@@ -27,10 +28,12 @@ public class Main {
 				cnt += nums[j];
 			}
 
-			if (isPassable && section == m) {
-				System.out.println(i);
-				return;
+			if (isPassable && section <= m) {
+				ans = i;
+                break;
 			}
 		}
+
+        System.out.println(ans);
 	}
 }
