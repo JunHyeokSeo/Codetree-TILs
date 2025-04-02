@@ -11,23 +11,23 @@ public class Main {
 
 		int ans = 0;
 		for (int i = 1; i <= 100; i++) {
-			int[] tmp = Arrays.copyOf(a, a.length);
 			int cnt = 0;
+			int cntl = 0;
+
 			for (int j = 0; j < n; j++) {
-				if (i - a[j] == 1 && cnt < l) {
+				if (a[j] >= i)
 					cnt++;
-					tmp[j] = i;
+				if (a[j] + 1 == i) {
+					if (cntl < l) {
+						cnt++;
+						cntl++;
+					}
 				}
 			}
 
-			// H 탐색
-			int hCnt = 0;
-			for (int j = 0; j < n; j++) {
-				if (i <= tmp[j])
-					hCnt++;
+			if (i <= cnt) {
+				ans = i;
 			}
-			if (i <= hCnt)
-				ans = Math.max(ans, i);
 		}
 
 		System.out.println(ans);
