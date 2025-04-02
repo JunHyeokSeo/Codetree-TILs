@@ -46,8 +46,6 @@ public class Main {
 				continue;
 			}
 
-			System.out.println(Arrays.toString(wall));
-
 			// 그룹별 최대값
 			int max = 0;
 			int last = 0;
@@ -60,12 +58,11 @@ public class Main {
 
 				if (i != wall.length)
 					last = wall[i];
-				
+
 				max = Math.max(max, sum);
 			}
 
 			minMax = Math.min(minMax, max);
-			System.out.println("minMax = " + minMax);
 		}
 
 		System.out.println(minMax);
