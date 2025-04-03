@@ -5,6 +5,10 @@ public class Main {
 		int n = sc.nextInt();
 		int[] x1 = new int[n];
 		int[] x2 = new int[n];
+		for (int i = 0; i < n; i++) {
+			x1[i] = sc.nextInt();
+			x2[i] = sc.nextInt();
+		}
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
@@ -19,5 +23,7 @@ public class Main {
 		}
 
 		System.out.println("Yes");
+		
+		sc.close();
 	}
 }
