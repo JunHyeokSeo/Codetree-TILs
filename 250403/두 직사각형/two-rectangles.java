@@ -11,7 +11,7 @@ public class Main {
 		int a2 = sc.nextInt();
 		int b2 = sc.nextInt();
 
-		if ((x2 < a1 || a2 < x1) && (y2 < b1 || b2 < y1))
+		if ((x2 < a1 || a2 < x1) || (y2 < b1 || b2 < y1))
 			System.out.println("nonoverlapping");
 		else
 			System.out.println("overlapping");
