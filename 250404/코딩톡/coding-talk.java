@@ -16,7 +16,15 @@ public class Main {
 		if (u[p - 1] == 0)
 			return;
 
-		for (int i = M - 1; i >= p - 1; i--) {
+		int tmp = p - 1;
+		while (tmp >= 0) {
+			if (u[p - 1] != u[tmp - 1])
+				break;
+
+			tmp--;
+		}
+
+		for (int i = M - 1; i >= tmp; i--) {
 			chk[(c[i] - 'A')] = 1;
 		}
 
