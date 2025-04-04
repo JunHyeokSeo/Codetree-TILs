@@ -28,7 +28,7 @@ public class Main {
 			chk[(c[i] - 'A')] = 1;
 		}
 
-		for (int i = 0; i < M; i++) {
+		for (int i = 0; i < N; i++) {
 			if (chk[i] == 0)
 				System.out.print( (char) ('A' + i) + " ");
 		}
