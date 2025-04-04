@@ -16,21 +16,17 @@ public class Main {
 		if (u[p - 1] == 0)
 			return;
 
-		int tmp = p - 1;
-		while (tmp >= 0) {
-			if (u[p - 1] != u[tmp - 1])
-				break;
-
-			tmp--;
-		}
-
-		for (int i = M - 1; i >= tmp; i--) {
-			chk[(c[i] - 'A')] = 1;
-		}
-
 		for (int i = 0; i < N; i++) {
-			if (chk[i] == 0)
-				System.out.print( (char) ('A' + i) + " ");
+			char person = (char) ('A' + i);
+
+			boolean isRead = false;
+			for (int j = 0; j < M; j++) {
+				if (u[j] >= u[p - 1] && c[j] == person)
+					isRead = true;
+			}
+
+			if (!isRead)
+				System.out.print(person + " ");
 		}
 	}
 }
