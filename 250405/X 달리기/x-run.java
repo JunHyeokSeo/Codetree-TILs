@@ -12,7 +12,9 @@ public class Main {
 
 			if (dist + (speed + 1) + a <= x)
 				speed++;
-			else if (dist + speed + a > x && speed > 1)
+			else if (dist + speed + a <= x)
+				speed += 0;
+			else if (speed > 1)
 				speed--;
 
 			dist += speed;
