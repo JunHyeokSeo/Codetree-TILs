@@ -46,7 +46,7 @@ public class Main {
 			}
 		}
 
-		if (Arrays.equals(arr, tmp1)) {
+		if (!Arrays.equals(arr, tmp1)) {
 			int tmp1MinDist = Integer.MAX_VALUE;
 			for (int i = 0; i < n; i++) {
 				if (tmp1[i] != 1)
