@@ -15,16 +15,19 @@ public class Main {
 		int end = 0;
 		int max = 0;
 		for (int i = 0; i < arr.length; i++) {
-			for (int j = i + 1; j < arr.length; j++) {
-				if (arr[i] == 1 && arr[j] == 1) {
-					if (Math.abs(i - j) > max) {
+			if (arr[i] != 1)
+				continue;
 
-						max = Math.abs(i - j);
-						str = i;
-						end = j;
-					}
-					break;
+			for (int j = i + 1; j < arr.length; j++) {
+				if (arr[j] != 1)
+					continue;
+
+				if (j - i > max) {
+					max = j - i;
+					str = i;
+					end = j;
 				}
+				break;
 			}
 		}
 
@@ -32,11 +35,15 @@ public class Main {
 
 		int minDiff = Integer.MAX_VALUE;
 		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] != 1)
+				continue;
+			
 			for (int j = i + 1; j < arr.length; j++) {
-				if (arr[i] == 1 && arr[j] == 1) {
-					minDiff = Math.min(minDiff, Math.abs(i - j));
-					break;
-				}
+				if (arr[j] != 1)
+					continue;
+				
+				minDiff = Math.min(minDiff, j - 1);
+				break;
 			}
 		}
 
