@@ -1,29 +1,35 @@
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
+
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int[] arr = new int[3];
-		for (int i = 0; i < 3; i++) {
-			arr[i] = sc.nextInt();
-		}
+    public static final int MAX_N = 3;
 
-		int cnt = 0;
-		Arrays.sort(arr);
-		while (arr[0] - arr[1] != -1 || arr[1] - arr[2] != -1) {
-			int ab = Math.abs(arr[0] - arr[1]);
-			int bc = Math.abs(arr[1] - arr[2]);
+    public static int n = MAX_N;
+    public static int[] a = new int[MAX_N];
 
-			if ((ab <= bc && ab != 1) || (ab != 1 && bc == 1)) {
-				arr[2] = ab == 2 ? arr[0] + 1 : arr[0] + 2;
-			} else if (bc != 1) {
-				arr[0] = bc == 2 ? arr[1] + 1 : arr[1] + 2;
-			}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-			Arrays.sort(arr);
-			cnt++;
-		}
+        // 입력
+        for(int i = 0; i < n; i++)
+            a[i] = sc.nextInt();
 
-		System.out.println(cnt);
-	}
+        // 주어진 값들을 정렬합니다.
+        Arrays.sort(a);
+
+        // Case 1. 3개의 숫자가 전부 연속한 경우
+        // 이 경우에는 이동할 필요가 없으므로
+        // 최소 이동 횟수는 0이 됩니다.
+        if(a[0] + 1 == a[1] && a[1] + 1 == a[2])
+            System.out.print(0);
+        // Case 2. 2개의 숫자의 차이가 정확히 2가 나는 경우
+        // 이 경우에는 남은 숫자를 두 숫자 사이에 바로 넣어주면 되므로
+        // 최소 이동 횟수는 1이 됩니다.
+        else if(a[0] + 2 == a[1] || a[1] + 2 == a[2])
+            System.out.print(1);
+        // Case 3. 그렇지 않은 경우에는 항상 2번에 걸쳐
+        // 3개의 숫자를 연속하게 만드는 것이 가능합니다.
+        else
+            System.out.print(2);
+    }
 }
