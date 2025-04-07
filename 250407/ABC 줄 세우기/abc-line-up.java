@@ -19,13 +19,19 @@ public class Main {
 
 		int cnt = 0;
 		for (int i = 0; i < n; i++) {
-			for (int j = 1; j < n - i; j++) {
-				if (arr[i] > arr[j]) {
-					char tmp = arr[i];
-					arr[i] = arr[j];
-					arr[j] = tmp;
-					cnt++;
+			int pivot = 0;
+			for (int j = 0; j < n; j++) {
+				if (arr[j] == 'A' + i) {
+					pivot = j;
+					break;
 				}
+			}
+
+			for (int j = pivot; j > i; j--) {
+				char tmp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = tmp;
+				cnt++;
 			}
 		}
 
