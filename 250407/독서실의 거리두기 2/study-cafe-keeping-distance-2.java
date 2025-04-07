@@ -9,8 +9,10 @@ public class Main {
 		int[] arr = seats.chars().map(c -> Integer.parseInt(String.valueOf((char) c))).toArray();
 		int[] tmp1 = Arrays.copyOf(arr, arr.length);
 		int[] tmp2 = Arrays.copyOf(arr, arr.length);
+		int[] tmp3 = Arrays.copyOf(arr, arr.length);
 
 		tmp1[n - 1] = 1;
+		tmp3[0] = 1;
 
 		int str = 0;
 		int end = 0;
@@ -32,6 +34,7 @@ public class Main {
 
 		tmp2[(str + end) / 2] = 1;
 
+		int ans;
 		int tmp2MinDist = Integer.MAX_VALUE;
 		for (int i = 0; i < n; i++) {
 			if (tmp2[i] != 1)
@@ -45,6 +48,8 @@ public class Main {
 				break;
 			}
 		}
+
+		ans = tmp2MinDist;
 
 		if (!Arrays.equals(arr, tmp1)) {
 			int tmp1MinDist = Integer.MAX_VALUE;
@@ -60,12 +65,26 @@ public class Main {
 					break;
 				}
 			}
-
-			tmp2MinDist = Math.max(tmp1MinDist, tmp2MinDist);
+			ans = Math.max(ans, tmp1MinDist);
 		}
 
-		System.out.println(tmp2MinDist);
+		if (!Arrays.equals(arr, tmp3)) {
+			int tmp3MinDist = Integer.MAX_VALUE;
+			for (int i = 0; i < n; i++) {
+				if (tmp3[i] != 1)
+					continue;
 
+				for (int j = i + 1; j < n; j++) {
+					if (tmp3[j] != 1)
+						continue;
 
+					tmp3MinDist = Math.min(tmp3MinDist, j - i);
+					break;
+				}
+			}
+			ans = Math.max(ans, tmp3MinDist);
+		}
+
+		System.out.println(ans);
 	}
 }
