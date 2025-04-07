@@ -7,84 +7,59 @@ public class Main {
 		String seats = sc.next();
 
 		int[] arr = seats.chars().map(c -> Integer.parseInt(String.valueOf((char) c))).toArray();
-		int[] tmp1 = Arrays.copyOf(arr, arr.length);
-		int[] tmp2 = Arrays.copyOf(arr, arr.length);
-		int[] tmp3 = Arrays.copyOf(arr, arr.length);
+		int maxMinDist = 0;
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				if (arr[0] == 1)
+					continue;
+				arr[0] = 1;
+			} else if (i == 1) {
+				if (arr[n - 1] == 1)
+					continue;
+				arr[n - 1] = 1;
+			} else {
+				int str = 0;
+				int end = 0;
+				for (int j = 0; j < n; j++) {
+					if (arr[j] != 1)
+						continue;
+					for (int k = j + 1; k < n; k++) {
+						if (arr[k] != 1)
+							continue;
 
-		tmp1[n - 1] = 1;
-		tmp3[0] = 1;
+						if (end - str < k - j) {
+							str = j;
+							end = k;
+						}
 
-		int str = 0;
-		int end = 0;
-		for (int i = 0; i < n; i++) {
-			if (arr[i] != 1)
-				continue;
+						break;
+					}
+				}
 
-			for (int j = i + 1; j < n; j++) {
+				arr[(end + str) / 2] = 1;
+			}
+
+			int minDist = Integer.MAX_VALUE;
+			for (int j = 0; j < n; j++) {
 				if (arr[j] != 1)
 					continue;
-
-				if (end - str < j - 1) {
-					str = i;
-					end = j;
-					break;
-				}
-			}
-		}
-
-		tmp2[(str + end) / 2] = 1;
-
-		int ans;
-		int tmp2MinDist = Integer.MAX_VALUE;
-		for (int i = 0; i < n; i++) {
-			if (tmp2[i] != 1)
-				continue;
-
-			for (int j = i + 1; j < n; j++) {
-				if (tmp2[j] != 1)
-					continue;
-
-				tmp2MinDist = Math.min(tmp2MinDist, j - i);
-				break;
-			}
-		}
-
-		ans = tmp2MinDist;
-
-		if (!Arrays.equals(arr, tmp1)) {
-			int tmp1MinDist = Integer.MAX_VALUE;
-			for (int i = 0; i < n; i++) {
-				if (tmp1[i] != 1)
-					continue;
-
-				for (int j = i + 1; j < n; j++) {
-					if (tmp1[j] != 1)
+				for (int k = j + 1; k < n; k++) {
+					if (arr[k] != 1)
 						continue;
-
-					tmp1MinDist = Math.min(tmp1MinDist, j - i);
+					minDist = Math.min(minDist, k - j);
 					break;
 				}
 			}
-			ans = Math.max(ans, tmp1MinDist);
+			
+			maxMinDist = Math.max(maxMinDist, minDist);
+
+			if (i == 0)
+				arr[0] = 0;
+
+			if (i == 1)
+				arr[n - 1] = 0;
 		}
 
-		if (!Arrays.equals(arr, tmp3)) {
-			int tmp3MinDist = Integer.MAX_VALUE;
-			for (int i = 0; i < n; i++) {
-				if (tmp3[i] != 1)
-					continue;
-
-				for (int j = i + 1; j < n; j++) {
-					if (tmp3[j] != 1)
-						continue;
-
-					tmp3MinDist = Math.min(tmp3MinDist, j - i);
-					break;
-				}
-			}
-			ans = Math.max(ans, tmp3MinDist);
-		}
-
-		System.out.println(ans);
+		System.out.println(maxMinDist);
 	}
 }
