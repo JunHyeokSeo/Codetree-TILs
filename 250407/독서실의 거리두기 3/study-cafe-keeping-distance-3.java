@@ -16,8 +16,8 @@ public class Main {
 		int max = 0;
 		for (int i = 0; i < arr.length; i++) {
 			for (int j = i + 1; j < arr.length; j++) {
-				if (arr[i] == 1 && arr[j] == 1 && Math.abs(i - j) > max) {
-					max = Math.abs(i - j);
+				if (arr[i] == 1 && arr[j] == 1) {
+					max = Math.max(max, Math.abs(i - j));
 					str = i;
 					end = j;
 					break;
@@ -25,7 +25,7 @@ public class Main {
 			}
 		}
 
-		arr[str + end / 2] = 1;
+		arr[(str + end) / 2] = 1;
 
 		int minDiff = Integer.MAX_VALUE;
 		for (int i = 0; i < arr.length; i++) {
