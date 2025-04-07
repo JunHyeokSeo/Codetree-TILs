@@ -14,21 +14,17 @@ public class Main {
 		int str = 0;
 		int end = 0;
 		int max = 0;
-		for (int i = 1; i < arr.length; i++) {
-			if (arr[i] == 1) {
-				max = i;
-				end = i;
-				break;
-			}
-		}
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = i + 1; j < arr.length; j++) {
+				if (arr[i] == 1 && arr[j] == 1) {
+					if (Math.abs(i - j) > max) {
 
-		for (int i = arr.length - 2; i >= 0; i--) {
-			if (arr[i] == 1) {
-				if (arr.length - 1 - i > max) {
-					str = i;
-					end = arr.length - 1;
+						max = Math.abs(i - j);
+						str = i;
+						end = j;
+					}
+					break;
 				}
-				break;
 			}
 		}
 
