@@ -36,12 +36,16 @@ public class Main {
 
 			if (min <= rx && rx <= max)
 				System.out.println(max - min + 1);
+			else
+				System.out.println(max - min - 1);
 		} else if (bx == rx && rx == lx) {
 			int min = Math.min(by, ly);
 			int max = Math.max(by, ly);
 
 			if (min <= ry && ry <= max)
 				System.out.println(max - min + 1);
+			else
+				System.out.println(max - min - 1);
 		} else {
 			System.out.println(Math.abs(bx - lx) + Math.abs(by - ly) - 1);
 		}
