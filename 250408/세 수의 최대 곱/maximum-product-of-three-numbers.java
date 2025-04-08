@@ -12,7 +12,7 @@ public class Main {
 
 		Arrays.sort(arr);
 
-		int max = arr[n - 1] * arr[n - 2] - arr[n - 3];
+		int max = arr[n - 1] * arr[n - 2] * arr[n - 3];
 		if (arr[0] < 0 && arr[1] < 0)
 			max = Math.max(max, arr[n - 1] * arr[0] * arr[1]);
 
