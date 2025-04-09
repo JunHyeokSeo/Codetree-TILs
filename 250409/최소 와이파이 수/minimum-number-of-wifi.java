@@ -8,6 +8,11 @@ public class Main {
 		for(int i = 0; i < n; i++)
 			arr[i] = sc.nextInt();
 
+		if (m >= n) {
+			System.out.println(1);
+			return;
+		}
+
 		int cnt = 0;
 		for (int i = 0; i < n; i++) {
 			int str = Math.max(i - m, 0);
