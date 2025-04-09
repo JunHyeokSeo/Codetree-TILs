@@ -23,11 +23,19 @@ public class Main {
 		}
 
 		int cnt = 0;
-		for (int i = 0; i < n; i++) {
-			int str = Math.max(i - m, 0);
-			int end = Math.min(i + m, n - 1);
+		for (int i = m; i < n - m; i++) {
+			int str = i - m;
+			int end = i + m;
 
-			if (arr[str] == 1 && str == i - m) {
+			boolean hasOne = false;
+			for (int j = str; j <= end; j++) {
+				if (arr[j] == 1) {
+					hasOne = true;
+					break;
+				}
+			}
+
+			if (arr[str] == 1 || (hasOne && end == n - 1)) {
 				cnt++;
 				for (int j = str; j <= end; j++) {
 					arr[j] = 0;
