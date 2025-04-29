@@ -22,10 +22,10 @@ public class Main {
 				//첫번째 사각형 크기
 				for (int k = 0; k < n; k++) {
 					for (int l = 0; l < m; l++) {
-						int ax1 = i;
-						int ay1 = j;
-						int ax2 = i + k;
-						int ay2 = j + l;
+						int ay1 = i;
+						int ax1 = j;
+						int ay2 = i + k;
+						int ax2 = j + l;
 
 						//두번째 사각형 시작점
 						for (int o = 0; o < n; o++) {
@@ -33,10 +33,10 @@ public class Main {
 								//두번째 사각형 크기
 								for (int q = 0; q < n; q++) {
 									for (int r = 0; r < m; r++) {
-										int bx1 = o;
-										int by1 = p;
-										int bx2 = o + q;
-										int by2 = p + r;
+										int by1 = o;
+										int bx1 = p;
+										int by2 = o + q;
+										int bx2 = p + r;
 
 										if (isOver(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2))
 											continue;
