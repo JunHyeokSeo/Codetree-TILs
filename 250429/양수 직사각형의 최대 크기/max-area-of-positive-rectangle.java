@@ -29,9 +29,9 @@ public class Main {
 	}
 
 	public static boolean isAllPlus(int x1, int x2, int y1, int y2) {
-		for (int i = x1; i <= x2; i++) {
-			for (int j = y1; j <= y2; j++) {
-				if (i > n - 1 || j > m - 1 || grid[i][j] < 0)
+		for (int i = y1; i <= y2; i++) {
+			for (int j = x1; j <= x2; j++) {
+				if (i > n - 1 || j > m - 1 || grid[i][j] <= 0)
 					return false;
 			}
 		}
