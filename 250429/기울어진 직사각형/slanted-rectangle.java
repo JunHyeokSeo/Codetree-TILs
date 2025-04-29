@@ -1,74 +1,54 @@
 import java.util.Scanner;
 public class Main {
+	public static int n;
+	public static int[][] grid;
+	public static int[] x = {1, -1, -1, 1};
+	public static int[] y = {-1, -1, 1, 1};
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int[][] grid = new int[n][n];
-		int[] x = {1, -1, -1, 1};
-		int[] y = {-1, -1, 1, 1};
+		n = sc.nextInt();
+		grid = new int[n][n];
 
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < n; j++)
 				grid[i][j] = sc.nextInt();
 
-		int maxSum = 0;
+		int ans = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				int sum = 0;
-				int tmpY = i;
-				int tmpX = j;
+				for (int k = 1; k < n; k++) {
+					for (int l = 1; l < n; l++) {
+						int sum = getSum(i, j, k, l);
+						if (sum == 0)
+							continue;
 
-				if ((i == 0 && (j == 0 || j == n -1)) || (i == n - 1 && (j == 0 || j == n -1)))
-					continue;
-
-				int dir = 0;
-				int calcY = i;
-				int calcX = j;
-				int maxWidth = 0;
-				while (--calcY >= 0 && --calcX >= 0)
-					maxWidth++;
-
-				if (maxWidth == 0)
-					continue;
-
-				int turnY = i;
-				int turnX = j;
-				int maxY = i;
-				int maxX = j;
-				int max = 0;
-				while (--turnY >= 0 && ++turnX < n) {
-					int tmpSum = 0;
-
-					for (int k = 1; k <= maxWidth; k++) {
-						if (turnY - k < 0 || turnX - k < 0)
-							break;
-
-						tmpSum += grid[turnY - k][turnX - k];
+						ans = Math.max(ans, sum);
 					}
-
-					if (tmpSum >= max) {
-						max = tmpSum;
-						maxY = turnY;
-						maxX = turnX;
-					}
-				}
-
-				while (dir < 4 && (dir != 3 || tmpY != i || tmpX != j)) {
-					if ((dir == 0 && tmpY == maxY && tmpX == maxX)|| tmpY + y[dir] < 0 || tmpY + y[dir] > n - 1 || tmpX + x[dir] < 0 || tmpX + x[dir] > n - 1) {
-						dir++;
-					} else {
-						sum += grid[tmpY][tmpX];
-						tmpY += y[dir];
-						tmpX += x[dir];
-					}
-				}
-
-				if (tmpY == i && tmpX == j) {
-					maxSum = Math.max(maxSum, sum);
 				}
 			}
 		}
 
-		System.out.println(maxSum);
+		System.out.println(ans);
+	}
+
+	public static int getSum(int i, int j, int k, int l) {
+		int tmpI = i;
+		int tmpJ = j;
+		int[] moveNum = {k, l, k, l};
+		int sum = 0;
+
+		for (int m = 0; m < 4; m++) {
+			for (int o = 0; o < moveNum[m]; o++) {
+				sum += grid[tmpI][tmpJ];
+				tmpI += y[m];
+				tmpJ += x[m];
+				if (tmpI < 0 || tmpI > n - 1 || tmpJ < 0 || tmpJ > n - 1) {
+					return 0;
+				}
+			}
+		}
+
+		return sum;
 	}
 }
