@@ -13,7 +13,7 @@ public class Main {
 			for (int j = 0; j < m; j++)
 				grid[i][j] = sc.nextInt();
 
-		int ans = 0;
+		int ans = -1;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				for (int k = 0; k < n; k++) {
