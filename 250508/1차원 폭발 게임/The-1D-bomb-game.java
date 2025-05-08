@@ -30,9 +30,12 @@ public class Main {
 
 		int totDelItem = 0;
 		for (int i = 0; i < bombs.length; i++) {
+			if (bombs[i] == 0)
+				continue;
+
 			int cnt = 1;
 			for (int j = i + 1; j < bombs.length ; j++) {
-				if (bombs[i] == 0 || bombs[i] != bombs[j])
+				if (bombs[i] != bombs[j])
 					break;
 
 				cnt++;
