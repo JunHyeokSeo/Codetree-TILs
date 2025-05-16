@@ -17,16 +17,22 @@ public class Main {
 				grid[i][j] = sc.nextInt();
 
 		for (int i = 0; i < k; i++) {
-			bomb();
-			gravity();
+			int cnt;
+			do {
+				cnt = bomb();
+				gravity();
+			} while (cnt != 0);
 			turn();
 			gravity();
 		}
+		bomb();
 
 		print();
 	}
 
-	public static void bomb() {
+	public static int bomb() {
+		int totCnt = 0;
+
 		for (int col = 0; col < n; col++) {
 			for (int row = 0; row < n; row++) {
 				if (grid[row][col] == 0)
@@ -38,8 +44,11 @@ public class Main {
 
 				for (int i = 0; i < serialItemCnt; i++)
 					grid[row + i][col] = 0;
+				totCnt += serialItemCnt;
 			}
 		}
+
+		return totCnt;
 	}
 
 	public static int getSerialItemCnt(int row, int col, int num) {
