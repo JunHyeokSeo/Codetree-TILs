@@ -16,16 +16,19 @@ public class Main {
 			for (int j = 0; j < n; j++)
 				grid[i][j] = sc.nextInt();
 
+		int cnt;
 		for (int i = 0; i < k; i++) {
-			int cnt;
 			do {
 				cnt = bomb();
 				gravity();
 			} while (cnt != 0);
 			turn();
-			gravity();
 		}
-		bomb();
+
+		do {
+			cnt = bomb();
+			gravity();
+		} while (cnt != 0);
 
 		print();
 	}
@@ -89,6 +92,7 @@ public class Main {
 		}
 
 		grid = tmp;
+		gravity();
 	}
 
 	public static void print() {
