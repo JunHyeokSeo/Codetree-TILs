@@ -10,7 +10,6 @@ public class Main {
 		//좌상우하
 		int[] x = {-1, 0, 1, 0};
 		int[] y = {0, -1, 0, 1};
-		char[][] infLoop = {{'.', '.', '.'}, {'.', '#', '.'}, {'.', '.', '.'}};
 
 		char[][] maze = new char[n][n];
 		for (int i = 0; i < n; i++) {
@@ -22,16 +21,13 @@ public class Main {
 
 		int cnt = 0;
 		while (true) {
-			int nextR;
-			int nextC;
-
-			int rightDir = (dir + 1) % 4;
-			int rightR = r + y[rightDir] - 1;
-			int rightC = c + x[rightDir] - 1;
-			if (isInfLoop(maze, infLoop, rightR, rightC)) {
+			if (cnt > n * n) {
 				System.out.println(-1);
 				return;
 			}
+
+			int nextR;
+			int nextC;
 
 			//앞이 벽이면 반시계 방향 90도 회전
 			int dirCnt = 0;
@@ -57,24 +53,15 @@ public class Main {
 			if (!isRange(r, c, n))
 				break;
 
-			rightDir = (dir + 1) % 4;
-			rightR = r + y[rightDir];
-			rightC = c + x[rightDir];
+			int rightDir = (dir + 1) % 4;
+			int rightR = r + y[rightDir];
+			int rightC = c + x[rightDir];
 
 			if (maze[rightR][rightC] != '#') {
 				dir = rightDir;
 				r = rightR;
 				c = rightC;
 				cnt++;
-			}
-
-			rightDir = (dir + 1) % 4;
-			rightR = r + y[rightDir] - 1;
-			rightC = c + x[rightDir] - 1;
-
-			if (isInfLoop(maze, infLoop, rightR, rightC)) {
-				System.out.println(-1);
-				return;
 			}
 
 //			for (int i = 0; i < n; i++) {
@@ -97,17 +84,15 @@ public class Main {
 		return (r >= 0 && r < n && c >= 0 && c < n);
 	}
 
-	public static boolean isInfLoop(char[][] maze, char[][] infLoop, int r, int c) {
-		if (c < 0 || r < 0 || r + 2 >= maze.length || c + 2 >= maze.length)
-			return false;
-
-		for (int i = r; i <= r + 2; i++) {
-			for (int j = c; j <= c + 2; j++) {
-				if (maze[i][j] != infLoop[i - r][j - c])
-					return false;
-			}
-		}
-
-		return true;
-	}
+//	public static boolean isInfLoop(char[][] maze) {
+//		int cnt = 0;
+//		for (int i = 0; i < maze.length; i++) {
+//			for (int j = 0; j < maze.length; j++) {
+//				if (i != 0 && j != 0)
+//					continue;
+//
+//				if (maze[i][j] == '#')
+//			}
+//		}
+//	}
 }
