@@ -77,17 +77,17 @@ public class Main {
 				return;
 			}
 
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					if (i == r && j == c)
-						System.out.print("☆");
-					else
-						System.out.print(maze[i][j]);
-
-					System.out.print(" ");
-				}
-				System.out.println();
-			}
+//			for (int i = 0; i < n; i++) {
+//				for (int j = 0; j < n; j++) {
+//					if (i == r && j == c)
+//						System.out.print("☆");
+//					else
+//						System.out.print(maze[i][j]);
+//
+//					System.out.print(" ");
+//				}
+//				System.out.println();
+//			}
 		}
 
 		System.out.println(cnt);
