@@ -25,8 +25,15 @@ public class Main {
 		while (true) {
 			int nextR;
 			int nextC;
+
 			//앞이 벽이면 반시계 방향 90도 회전
+			int dirCnt = 0;
 			while (true) {
+				if (dirCnt > 4) {
+					System.out.println(-1);
+					return;
+				}
+
 				nextR = r + y[dir];
 				nextC = c + x[dir];
 
@@ -34,6 +41,7 @@ public class Main {
 					break;
 
 				dir = dir == 0 ? 3 : dir - 1;
+				dirCnt++;
 			}
 
 			cnt++;
