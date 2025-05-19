@@ -20,22 +20,22 @@ public class Main {
 			int tmpC;
 
 			switch (direction) {
-				case "L" -> {
+				case "L":
 					tmpR = r + y[0];
 					tmpC = c + x[0];
-				}
-				case "R" -> {
+					break;
+				case "R":
 					tmpR = r + y[1];
 					tmpC = c + x[1];
-				}
-				case "U" -> {
-					tmpR = r + y[2];
-					tmpC = c + x[2];
-				}
-				default -> {
-					tmpR = r + y[3];
-					tmpC = c + x[3];
-				}
+					break;
+				case "U":
+						tmpR = r + y[2];
+						tmpC = c + x[2];
+						break;
+				default:
+						tmpR = r + y[3];
+						tmpC = c + x[3];
+						break;
 			}
 
 			if (tmpR < 0 || tmpR > n - 1 || tmpC < 0 || tmpC > n - 1)
@@ -61,7 +61,7 @@ public class Main {
 		int[][] newDice = new int[3][4];
 
 		switch (direction) {
-			case "U" -> {
+			case "U":
 				newDice[1][1] = dice[1][1];
 				newDice[1][3] = dice[1][3];
 
@@ -69,8 +69,8 @@ public class Main {
 				newDice[2][2] = dice[1][2];
 				newDice[0][2] = dice[1][0];
 				newDice[1][0] = dice[2][2];
-			}
-			case "D" -> {
+				break;
+			case "D":
 				newDice[1][1] = dice[1][1];
 				newDice[1][3] = dice[1][3];
 
@@ -78,21 +78,21 @@ public class Main {
 				newDice[1][2] = dice[2][2];
 				newDice[2][2] = dice[1][0];
 				newDice[1][0] = dice[0][2];
-			}
-			case "L" -> {
+				break;
+			case "L":
 				newDice[0][2] = dice[0][2];
 				newDice[2][2] = dice[2][2];
 
 				System.arraycopy(dice[1], 0, newDice[1], 1, 3);
 				newDice[1][0] = dice[1][3];
-			}
-			default -> {
+				break;
+			default:
 				newDice[0][2] = dice[0][2];
 				newDice[2][2] = dice[2][2];
 
 				System.arraycopy(dice[1], 1, newDice[1], 0, 3);
 				newDice[1][3] = dice[1][0];
-			}
+				break;
 		}
 
 		dice = newDice;
