@@ -13,8 +13,6 @@ public class Main {
 		int c = sc.nextInt() - 1;
 		grid = new int[n][n];
 		grid[r][c] = 1;
-		System.out.println("m = 0");
-		print();
 
 		for (int i = 1; i <= m; i++) {
 			int[][] tmp = new int[n][n];
@@ -40,8 +38,6 @@ public class Main {
 			}
 
 			grid = tmp;
-			System.out.println("m = " + i);
-			print();
 		}
 
 		int cnt = 0;
@@ -52,14 +48,5 @@ public class Main {
 		}
 
 		System.out.println(cnt);
-	}
-
-	public static void print() {
-		for (int[] ints : grid) {
-			for (int anInt : ints) {
-				System.out.print(anInt + " ");
-			}
-			System.out.println();
-		}
 	}
 }
