@@ -22,6 +22,7 @@ public class Main {
 			for (int col = 0; col < n; col++) {
 				for (int dir = 0; dir < 4; dir++) {
 					int moveCnt = moveBall(row, col, dir);
+
 					maxCnt = Math.max(maxCnt, moveCnt);
 				}
 			}
@@ -31,10 +32,6 @@ public class Main {
 	}
 
 	public static int moveBall(int row, int col, int dir) {
-		// 각 테두리에서 시작한 것이 아니면 return 0
-		if (!isOverTheRange(row - y[dir], col - x[dir]))
-			return 0;
-
 		int cnt = 1;
 
 		while (true) {
