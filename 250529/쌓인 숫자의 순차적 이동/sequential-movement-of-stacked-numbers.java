@@ -61,6 +61,9 @@ public class Main {
 				}
 			}
 
+			if (max == 0)
+				continue;
+
 			//이동하기
 			String strForMove = grid[rowForMove][colForMove];
 			int idxForMove = strForMove.indexOf(moveNum) + moveNum.length();
