@@ -53,7 +53,7 @@ public class Main {
 				if (grid[nextRow][nextCol] == null)
 					continue;
 
-				int maxOfStr = Arrays.stream(grid[nextRow][nextCol].split(" ")).mapToInt(Integer::parseInt).max().orElseThrow();
+				int maxOfStr = Arrays.stream(grid[nextRow][nextCol].split(" ")).mapToInt(Integer::parseInt).max().orElseThrow(() -> new IllegalArgumentException("입력 문자열에 숫자가 없습니다."));
 				if (maxOfStr > max) {
 					maxRow = nextRow;
 					maxCol = nextCol;
