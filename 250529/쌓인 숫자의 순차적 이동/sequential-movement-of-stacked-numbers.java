@@ -29,9 +29,13 @@ public class Main {
 					if (grid[row][col] == null)
 						continue;
 
-					if (grid[row][col].contains(moveNum)) {
-						rowForMove = row;
-						colForMove = col;
+					String[] split = grid[row][col].split(" ");
+					for (String s : split) {
+						if (s.equals(moveNum)) {
+							rowForMove = row;
+							colForMove = col;
+							break;
+						}
 					}
 				}
 			}
@@ -66,9 +70,19 @@ public class Main {
 
 			//이동하기
 			String strForMove = grid[rowForMove][colForMove];
-			int idxForMove = strForMove.indexOf(moveNum) + moveNum.length();
-			String partOfStrForMove = strForMove.substring(0, idxForMove);
-			String restOfStrForMove = strForMove.substring(idxForMove).trim().isEmpty() ? null : strForMove.substring(idxForMove).trim();
+			String[] split = strForMove.split(" ");
+			int idxForMove = 0;
+			for (String s : split) {
+				if (s.equals(moveNum)) {
+					idxForMove += moveNum.length();
+					break;
+				} else {
+					idxForMove += s.length() + 1;
+				}
+			}
+
+			String partOfStrForMove = strForMove.substring(0, idxForMove).trim();
+			String restOfStrForMove = (strForMove.length() < idxForMove || strForMove.substring(idxForMove).trim().isEmpty()) ? null : strForMove.substring(idxForMove).trim();
 			grid[rowForMove][colForMove] = restOfStrForMove;
 			String originMovingPointStr = grid[maxRow][maxCol];
 			grid[maxRow][maxCol] = partOfStrForMove + " " +  originMovingPointStr;
