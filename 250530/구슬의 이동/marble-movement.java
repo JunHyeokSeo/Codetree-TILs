@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -83,7 +84,7 @@ public class Main {
 			//새로운 이동 포인트 탐색
 			int tmpPos = nextPos + (dyx[dir] * speed);
 
-			if (nextPos - tmpPos == 0)
+			if (nextPos == tmpPos)
 				break;
 
 			//범위 초과
@@ -96,14 +97,12 @@ public class Main {
 				nextPos = n - 1;
 				dir--;
 			} else {
-				//속도 저하
 				speed -= Math.abs(nextPos - tmpPos);
-
-				//위치이동
 				nextPos = tmpPos;
 			}
 		}
 
+		ball.dir = dir;
 		return nextPos;
 	}
 
