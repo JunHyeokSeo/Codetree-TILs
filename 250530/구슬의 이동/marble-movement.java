@@ -86,17 +86,22 @@ public class Main {
 			if (nextPos - tmpPos == 0)
 				break;
 
-			//속도 저하
-			speed -= Math.abs(nextPos - tmpPos);
-
 			//범위 초과
-			if (tmpPos < 0 || tmpPos > n - 1) {
-				//끝지점 이동
-				nextPos = tmpPos < 0 ? 0 : n - 1;
-				//방향전환
-				dir = dir % 2 == 0 ? dir + 1 : dir - 1;
-			} else
+			if (tmpPos < 0) {
+				speed -= nextPos;
+				nextPos = 0;
+				dir++;
+			} else if (tmpPos > n - 1) {
+				speed -= (n - 1) - nextPos;
+				nextPos = n - 1;
+				dir--;
+			} else {
+				//속도 저하
+				speed -= Math.abs(nextPos - tmpPos);
+
+				//위치이동
 				nextPos = tmpPos;
+			}
 		}
 
 		return nextPos;
@@ -183,6 +188,15 @@ public class Main {
 
 		public void setSpeed(int speed) {
 			this.speed = speed;
+		}
+
+		@Override
+		public String toString() {
+			return "Ball{" +
+					       "dir=" + dir +
+					       ", num=" + num +
+					       ", speed=" + speed +
+					       '}';
 		}
 	}
 }
