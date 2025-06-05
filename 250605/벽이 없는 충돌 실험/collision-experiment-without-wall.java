@@ -30,6 +30,9 @@ public class Main {
 			for (int i = 1; i <= N * 2; i++) {
 				if (moveBall(balls) != 0)
 					lastCrashTime = i;
+
+				if (balls.isEmpty())
+					break;
 			}
 
 			System.out.println(lastCrashTime);
