@@ -26,8 +26,8 @@ public class Main {
 			}
 
 			int lastCrashTime = -1;
-			//방향 전환이 없는 평면에서 N * 2만큼 순회하면 충분하다고 판단
-			for (int i = 1; i <= N; i++) {
+			//방향 전환이 없는 평면에서 N + 1만큼 순회하면 충분하다고 판단
+			for (int i = 1; i <= N + 1; i++) {
 				if (moveBall(balls) != 0)
 					lastCrashTime = i;
 
