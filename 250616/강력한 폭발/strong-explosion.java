@@ -1,100 +1,102 @@
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+class Pair { 
+    int x, y;
+    public Pair(int x, int y) { 
+        this.x = x; 
+        this.y = y; 
+    } 
+}
 
 public class Main {
-	public static class Point {
-		public int row;
-		public int col;
+    public static final int BOMB_TYPE_NUM = 3;
+    public static final int MAX_N = 20;
+    
+    public static int n;
+    public static int[][] bombType = new int[MAX_N][MAX_N];
+    public static boolean[][] bombed = new boolean[MAX_N][MAX_N];
+    
+    public static int ans;
 
-		public Point(int row, int col) {
-			this.row = row;
-			this.col = col;
-		}
-	}
+    public static ArrayList<Pair> bombPos = new ArrayList<>();
+    
+    public static boolean inRange(int x, int y) {
+        return 0 <= x && x < n && 0 <= y && y < n;
+    }
+    
+    public static void bomb(int x, int y, int bType) {
+        // 폭탄 종류마다 터질 위치를 미리 정의합니다.
+        Pair[][] bombShapes = {
+            {},
+            {new Pair(-2, 0), new Pair(-1, 0), new Pair(0, 0), new Pair(1, 0), new Pair(2, 0)},
+            {new Pair(-1, 0), new Pair(1, 0), new Pair(0, 0), new Pair(0, -1), new Pair(0, 1)},
+            {new Pair(-1, -1), new Pair(-1, 1), new Pair(0, 0), new Pair(1, -1), new Pair(1, 1)}
+        };
+        
+        // 격자 내 칸에 대해서만 영역을 표시합니다.
+        for(int i = 0; i < 5; i++) {
+            int dx = bombShapes[bType][i].x;
+            int dy = bombShapes[bType][i].y;
+            
+            int nx = x + dx, ny = y + dy;
+            if(inRange(nx, ny))
+                bombed[nx][ny] = true;
+        }
+    }
+    
+    public static int calc() {
+        // Step1. 폭탄이 터진 위치를 표시하는 배열을
+        // 초기화합니다.
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                bombed[i][j] = false;
+        
+        // Step2. 각 폭탄의 타입에 따라 
+        // 초토화 되는 영역을 표시합니다.
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                if(bombType[i][j] > 0)
+                    bomb(i, j, bombType[i][j]);
+        
+        // Step3. 초토화된 영역의 수를 구합니다.
+        int cnt = 0;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                if(bombed[i][j])
+                    cnt++;
+        
+        return cnt;
+    }
+    
+    public static void findMaxArea(int cnt) {
+        if(cnt == (int) bombPos.size()) {
+            ans = Math.max(ans, calc());
+            return;
+        }
+        for(int i = 1; i <= 3; i++) {
+            int x = bombPos.get(cnt).x;
+            int y = bombPos.get(cnt).y;
+            
+            bombType[x][y] = i;
+            findMaxArea(cnt + 1);
+            bombType[x][y] = 0;
+        }
+    }
 
-	static int[] x = {0, 0, 0, 0, 0, 0, -1, 1, -1, 1, -1, 1};
-	static int[] y = {-2, -1, 1, 2, -1, 1, 0, 0, -1, -1, 1, 1};
-	static int maxExploreCnt = 0;
-	static List<Point> points = new ArrayList<>();
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int[][] grid = new int[n][n];
-		int bombCnt;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				int input = sc.nextInt();
-				grid[i][j] = input;
-
-				if (input == 1) {
-					points.add(new Point(i, j));
-				}
-			}
-		}
-
-		bombCnt = points.size();
-		getCnt(bombCnt, 0, n, grid);
-		System.out.println(maxExploreCnt);
-	}
-
-
-	public static void getCnt(int bombCnt, int depth, int n, int[][] grid) {
-		if (depth == bombCnt) {
-			int exploreCnt = 0;
-			for (int row = 0; row < n; row++) {
-				for (int col = 0; col < n; col++) {
-					if (grid[row][col] < 0)
-						exploreCnt++;
-				}
-			}
-
-			maxExploreCnt = Math.max(maxExploreCnt, exploreCnt);
-			return;
-		}
-
-		Point point = points.get(depth);
-		int row = point.row;
-		int col = point.col;
-
-		for (int bombKind = 0; bombKind < 3; bombKind++) {
-			bomb(row, col, n, bombKind, grid);
-			getCnt(bombCnt, depth + 1, n, grid);
-			recover(row, col, n, bombKind, grid);
-		}
-	}
-
-	public static void bomb(int row, int col, int n, int bombKind, int[][] grid) {
-		grid[row][col] = -1;
-		int idx = bombKind * 4;
-
-		for (int i = idx; i < idx + 4; i++) {
-			int tmpRow = row + y[i];
-			int tmpCol = col + x[i];
-
-			if (tmpRow < 0 || tmpRow > n - 1 || tmpCol < 0 || tmpCol > n - 1)
-				continue;
-
-			if (grid[tmpRow][tmpCol] <= 0)
-				grid[tmpRow][tmpCol]--;
-		}
-	}
-
-	public static void recover(int row, int col, int n, int bombKind, int[][] grid) {
-		grid[row][col] = 1;
-		int idx = bombKind * 4;
-
-		for (int i = idx; i < idx + 4; i++) {
-			int tmpRow = row + y[i];
-			int tmpCol = col + x[i];
-
-			if (tmpRow < 0 || tmpRow > n - 1 || tmpCol < 0 || tmpCol > n - 1)
-				continue;
-
-			if (grid[tmpRow][tmpCol] < 0)
-				grid[tmpRow][tmpCol]++;
-		}
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++) {
+                int bombPlace = sc.nextInt();
+                if(bombPlace > 0)
+                    bombPos.add(new Pair(i, j));
+            }
+        
+        findMaxArea(0);
+        
+        System.out.print(ans);
+    }
 }
