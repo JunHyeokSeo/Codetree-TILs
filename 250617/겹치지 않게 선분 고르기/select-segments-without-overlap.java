@@ -4,8 +4,7 @@ public class Main {
 	public static int n;
 	public static int[][] segments;
 	public static int cnt;
-	public static int[] idxArr;
-	public static int size;
+	public static List<Integer> idx;
 	public static Set<Integer> idxForSearch;
 
 	public static void main(String[] args) {
@@ -13,8 +12,7 @@ public class Main {
 		n = sc.nextInt();
 		segments = new int[n][2];
 		cnt = 0;
-		idxArr = new int[n];
-		size = 0;
+		idx = new ArrayList<>();
 
 		idxForSearch = new HashSet<>();
 		for (int i = 0; i < n; i++) {
@@ -28,7 +26,7 @@ public class Main {
 
 
 	public static void getMaxLineCnt(int depth) {
-		boolean over = isOver(depth);
+		boolean over = isOver();
 		if (over || depth == n) {
 			cnt = Math.max(cnt, over ? depth - 1 : depth);
 			return;
@@ -37,20 +35,22 @@ public class Main {
 		for (int i = 0; i < n; i++) {
 			if (idxForSearch.contains(i))
 				continue;
-
-			idxArr[depth] = i;
+			
+			idx.add(i);
 			idxForSearch.add(i);
 			getMaxLineCnt(depth + 1);
+			idx.remove(idx.size() - 1);
 			idxForSearch.remove(i);
 		}
 	}
 
-	public static boolean isOver(int depth) {
-		if (depth <= 1)
+	public static boolean isOver() {
+		if (idx.isEmpty())
 			return false;
 
-		for (int i = 0; i < depth - 1; i++) {
-			if (!(segments[idxArr[depth - 1]][1] < segments[idxArr[i]][0] || segments[idxArr[depth - 1]][0] > segments[idxArr[i]][1]))
+		int idxValue = idx.get(idx.size() - 1);
+		for (int i = 0; i < idx.size() - 1; i++) {
+			if (!(segments[idxValue][1] < segments[idx.get(i)][0] || segments[idxValue][0] > segments[idx.get(i)][1]))
 				return true;
 		}
 
