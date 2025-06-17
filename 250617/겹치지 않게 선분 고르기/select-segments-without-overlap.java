@@ -25,8 +25,9 @@ public class Main {
 
 
 	public static void getMaxLineCnt(int depth) {
-		if (isOver() || depth == n) {
-			cnt = Math.max(cnt, depth);
+		boolean over = isOver();
+		if (over || depth == n) {
+			cnt = Math.max(cnt, over ? depth - 1 : depth);
 			return;
 		}
 
