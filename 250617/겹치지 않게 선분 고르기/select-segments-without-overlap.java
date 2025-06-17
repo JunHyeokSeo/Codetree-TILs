@@ -50,7 +50,7 @@ public class Main {
 				if (i == j)
 					continue;
 
-				if (!(segments[i][1] < segments[j][0] || segments[i][0] > segments[j][1]))
+				if (!(segments[idx.get(i)][1] < segments[idx.get(j)][0] || segments[idx.get(i)][0] > segments[idx.get(j)][1]))
 					return true;
 			}
 		}
