@@ -24,6 +24,7 @@ public class Main {
 			lines.add(new Line(left, right, row));
 		}
 
+		lines.sort(Comparator.comparingInt(line -> line.row));
 		fullLineSimulationResult = simulation(lines);
 		backTracking(0);
 		System.out.println(minLineCnt);
@@ -34,29 +35,12 @@ public class Main {
 			return Arrays.toString(IntStream.rangeClosed(1, n).toArray());
 		}
 
-		int[] people = new int[n];
-		linesForSimulation.sort(Comparator.comparingInt(line -> line.row));
-		int maxRow = linesForSimulation.get(linesForSimulation.size() - 1).row;
+		int[] people = IntStream.rangeClosed(1, n).toArray();
 
-		for (int i = 1; i <= n; i++) {
-			int col = i;
-
-			for (int row = 0; row <= maxRow; row++) {
-				for (Line line : linesForSimulation) {
-					if (line.row != row)
-						continue;
-
-					if (line.left == col) {
-						col++;
-						break;
-					} else if (line.right == col) {
-						col--;
-						break;
-					}
-				}
-			}
-
-			people[col - 1] = i;
+		for (Line line : linesForSimulation) {
+			int tmp = people[line.left - 1];
+			people[line.left - 1] = people[line.right - 1];
+			people[line.right - 1] = tmp;
 		}
 
 		return Arrays.toString(people);
