@@ -24,7 +24,7 @@ public class Main {
 		for (int row1 = 0; row1 < n; row1++) {
 			for (int col1 = 0; col1 <= n - m; col1++) {
 				for (int row2 = 0; row2 < n; row2++) {
-					for (int col2 = col1 + 1; col2 <= n - m; col2++) {
+					for (int col2 = 0; col2 <= n - m; col2++) {
 						if (isOverlap(row1, col1, row2, col2))
 							continue;
 
