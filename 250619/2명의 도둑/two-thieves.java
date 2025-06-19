@@ -7,8 +7,7 @@ public class Main {
 	public static int c;
 	public static int[][] grid;
 	public static List<Integer> comb;
-	public static List<Integer> activeComb;
-	public static int activeNum = 0;
+	public static int activeValue = 0;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -46,12 +45,9 @@ public class Main {
 
 							//초과
 							if (rowWeight > c) {
-								backtracking(0, colEnd[i], row[i]);
-								for (Integer idx : activeComb)
-									totalValue += (int) Math.pow(grid[row[i]][idx], 2);
-								activeNum = 0;
-								comb.clear();
-								activeComb.clear();
+								backtracking(colStr[i], colEnd[i], row[i]);
+								totalValue += activeValue;
+								activeValue = 0;
 							} else {
 								totalValue += rowValue;
 							}
@@ -67,14 +63,15 @@ public class Main {
 
 	public static void backtracking(int colIdx, int colEnd, int row) {
 		if (colIdx == colEnd) {
+			int value = 0;
 			int weight = 0;
-			for (Integer i : comb)
+			for (Integer i : comb) {
+				value += (int) Math.pow(grid[row][i], 2);
 				weight += grid[row][i];
-
-			if (weight > activeNum && weight <= c) {
-				activeComb = new ArrayList<>(comb);
-				activeNum = weight;
 			}
+
+			if (value > activeValue && weight <= c)
+				activeValue = value;
 
 			return;
 		}
