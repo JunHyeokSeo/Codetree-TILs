@@ -5,7 +5,7 @@ public class Main {
 	public static int[] numByAlpha = new int[DEPTH];
 	public static final char BIAS = 'a';
 	public static String str;
-	public static int maxValue = 0;
+	public static int maxValue = Integer.MIN_VALUE;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -16,7 +16,9 @@ public class Main {
 
 	public static void dfs(int depth) {
 		if (depth == DEPTH) {
-			maxValue = Math.max(maxValue, calcValue());
+			if (calcValue() > maxValue) {
+				maxValue = calcValue();
+			}
 			return;
 		}
 
