@@ -27,6 +27,9 @@ public class Main {
 	}
 
 	public static int calcValue() {
+		if (str.length() == 1)
+			return getNumByIdxArr(str.charAt(0));
+
 		char[] ca = str.toCharArray();
 		Integer result = null;
 		for (int i = 0; i < ca.length; i++) {
