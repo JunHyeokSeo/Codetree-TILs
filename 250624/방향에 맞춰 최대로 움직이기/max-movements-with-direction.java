@@ -32,45 +32,19 @@ public class Main {
 	}
 
 	public static void f(int depth, int row, int col) {
-		if (!canMove(row, col)) {
-			ans = Math.max(ans, depth);
-			return;
-		}
+		ans = Math.max(ans, depth);
 
-		int curNum = num[row][col];
 		for (int i = 1; i < n; i++) {
-			int nextRow = row + (dy[moveDir[row][col]] * i);
-			int nextCol = col + (dx[moveDir[row][col]] * i);
-
-			if (isOverTheRange(nextRow, nextCol))
-				break;
-
-			int nextNum = num[nextRow][nextCol];
-			if (nextNum > curNum)
-				f(depth + 1, nextRow, nextCol);
+			if (canGo(row + (dy[moveDir[row][col]] * i), col + (dx[moveDir[row][col]] * i), num[row][col]))
+				f(depth + 1, row + (dy[moveDir[row][col]] * i), col + (dx[moveDir[row][col]] * i));
 		}
 	}
 
-	public static boolean canMove(int row, int col) {
-		int curNum = num[row][col];
-		if (curNum == n * n)
-			return false;
-
-		for (int i = 1; i < n; i++) {
-			int nextRow = row + (dy[moveDir[row][col]] * i);
-			int nextCol = col + (dx[moveDir[row][col]] * i);
-
-			if (isOverTheRange(nextRow, nextCol))
-				return false;
-
-			if (num[nextRow][nextCol] > curNum)
-				return true;
-		}
-
-		return false;
+	public static boolean canGo(int row, int col, int prevNum) {
+		return inRange(row, col) && num[row][col] > prevNum;
 	}
 
-	public static boolean isOverTheRange(int row, int col) {
-		return row < 0 || row > n - 1 || col < 0 || col > n - 1;
+	public static boolean inRange(int row, int col) {
+		return !(row < 0 || row > n - 1 || col < 0 || col > n - 1);
 	}
 }
