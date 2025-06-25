@@ -35,37 +35,24 @@ public class Main {
 	}
 
 	public static boolean canNum() {
-		if (list.size() < 2)
-			return true;
+		boolean canNum = true;
 
-		if (list.get(list.size() - 2).equals(list.get(list.size() - 1)))
-			return false;
+		for (int i = 1; i <= list.size() / 2; i++) {
+			boolean same = true;
+			int idxOriginStr = list.size() - i;
+			int idxCloseStr = idxOriginStr - i;
+			for (int j = 0; j < i; j++) {
+				if (!list.get(idxOriginStr + j).equals(list.get(idxCloseStr + j))) {
+					same = false;
+					break;
+				}
+			}
 
-		//연속 부분수열 성립 확인
-		boolean hasFlow = false;
-		int strIdx = list.size() - 1;
-		for (int i = list.size() - 1; i > 0; i--) {
-			if (list.get(i) - list.get(i - 1) != 1)
-				break;
-
-			hasFlow = true;
-			strIdx = i - 1;
+			//같은게 하나라도 있으면
+			if (same)
+				canNum = false;
 		}
 
-		if (!hasFlow)
-			return true;
-
-		int flowLen = list.size() - strIdx;
-		if (strIdx - flowLen < 0)
-			return true;
-
-		int idxCloseFlow = strIdx - flowLen;
-		int idxOriginFlow = strIdx;
-		for (int i = 0; i < flowLen; i++) {
-			if (!list.get(idxCloseFlow + i).equals(list.get(idxOriginFlow + i)))
-				return true;
-		}
-
-		return false;
+		return canNum;
 	}
 }
