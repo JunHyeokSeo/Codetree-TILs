@@ -20,22 +20,12 @@ public class Main {
 	}
 
 	public static void f(int hopCnt, int index) {
-		if (index == n - 1) {
+		if (index >= n - 1) {
 			ans = Math.min(ans, hopCnt);
 			return;
 		}
 
-		int maxDist = arr[index];
-		for (int i = 1; i <= maxDist; i++) {
-			int nextIndex = index + i;
-			if (!inRange(nextIndex))
-				break;
-
-			f(hopCnt + 1, nextIndex);
-		}
-	}
-
-	public static boolean inRange(int index) {
-		return index > 0 && index < n;
+		for (int i = 1; i <= arr[index]; i++)
+			f(hopCnt + 1, index + i);
 	}
 }
