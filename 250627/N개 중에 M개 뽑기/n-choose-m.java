@@ -12,7 +12,7 @@ public class Main {
 		m = sc.nextInt();
 		list = new ArrayList<>();
 
-		f(0, 0);
+		f(1, 0);
 	}
 
 	public static void f(int depth, int cnt) {
