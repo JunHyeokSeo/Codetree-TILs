@@ -16,7 +16,7 @@ public class Main {
 	}
 
 	public static void f(int depth, int cnt) {
-		if (depth == m + 1) {
+		if (depth == n + 1) {
 			if (cnt == m)
 				print();
 			return;
