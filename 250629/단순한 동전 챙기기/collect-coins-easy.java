@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	static int n;
+	static int cnt = 0;
 	static int ans = Integer.MAX_VALUE;
 	static List<Integer> list = new ArrayList<>();
 	static String[][] grid;
@@ -20,6 +21,7 @@ public class Main {
 				String c = String.valueOf(str.charAt(col));
 				grid[row][col] = c;
 				if (!c.equals("S") && !c.equals("E") && !c.equals(".")) {
+					cnt++;
 					numRow[Integer.parseInt(c)] = row;
 					numCol[Integer.parseInt(c)] = col;
 				} else if (c.equals("S")) {
@@ -41,15 +43,20 @@ public class Main {
 	public static void f(int prevNum) {
 		if (list.size() == 3) {
 			ans = Math.min(ans, getDist());
+			return;
 		}
 
-		int curNum = prevNum + 1;
-		if (numRow[curNum] == -1)
+		if (prevNum == 9)
 			return;
 
-		list.add(curNum);
-		f(curNum);
-		list.remove(list.size() - 1);
+		int curNum = prevNum + 1;
+		if (numRow[curNum] == -1) {
+			f(curNum);
+		} else {
+			list.add(curNum);
+			f(curNum);
+			list.remove(list.size() - 1);
+		}
 	}
 
 	public static int getDist() {
