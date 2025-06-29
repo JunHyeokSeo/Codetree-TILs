@@ -39,17 +39,17 @@ public class Main {
 	}
 
 	public static void f(int prevNum) {
-		for (int i = prevNum + 1; i <= 9; i++) {
-			if (numRow[i] == -1)
-				continue;
-
-			list.add(i);
-			//이동 거리 계산
-			if (list.size() >= 3)
-				ans = Math.min(ans, getDist());
-			f(i);
-			list.remove(list.size() - 1);
+		if (list.size() == 3) {
+			ans = Math.min(ans, getDist());
 		}
+
+		int curNum = prevNum + 1;
+		if (numRow[curNum] == -1)
+			return;
+
+		list.add(curNum);
+		f(curNum);
+		list.remove(list.size() - 1);
 	}
 
 	public static int getDist() {
