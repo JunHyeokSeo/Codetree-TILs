@@ -1,77 +1,98 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+class Pair { 
+    int x, y;
+    public Pair(int x, int y) { 
+        this.x = x; 
+        this.y = y; 
+    } 
+}
 
 public class Main {
-	static int n;
-	static int ans = Integer.MAX_VALUE;
-	static List<Integer> list = new ArrayList<>();
-	static String[][] grid;
-	static int[] numRow = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-	static int[] numCol = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
+    public static final int INT_MAX = Integer.MAX_VALUE;
+    public static final int COIN_NUM = 9;
+    public static final int MAX_N = 20;
+    
+    public static int n;
+    public static int m = 3;
+    
+    public static char[][] grid = new char[MAX_N][MAX_N];
+    
+    public static ArrayList<Pair> coinPos = new ArrayList<>();
+    public static ArrayList<Pair> selectedPos = new ArrayList<>();
+        
+    public static Pair startPos;
+    public static Pair endPos;
+    
+    public static int ans = INT_MAX;
+    
+    public static int dist(Pair a, Pair b) {
+        int ax = a.x;
+        int ay = a.y;
 
-		grid = new String[n][n];
-		for (int row = 0; row < n; row++) {
-			String str = sc.next();
-			for (int col = 0; col < str.length(); col++) {
-				String c = String.valueOf(str.charAt(col));
-				grid[row][col] = c;
-				if (!c.equals("S") && !c.equals("E") && !c.equals(".")) {
-					numRow[Integer.parseInt(c)] = row;
-					numCol[Integer.parseInt(c)] = col;
-				} else if (c.equals("S")) {
-					numRow[0] = row;
-					numCol[0] = col;
-				} else if (c.equals("E")) {
-					numRow[10] = row;
-					numCol[10] = col;
-				}
-			}
-		}
+        int bx = b.x;
+        int by = b.y;
+        
+        return Math.abs(ax - bx) + Math.abs(ay - by);
+    }
+    
+    public static int calc() {
+        int numMoves = dist(startPos, selectedPos.get(0));
+        for(int i = 0; i < m - 1; i++)
+            numMoves += dist(selectedPos.get(i), selectedPos.get(i + 1));
+        numMoves += dist(selectedPos.get(m - 1), endPos);
+        
+        return numMoves;
+    }
+    
+    public static void findMinMoves(int currIdx, int cnt) {
+        if(cnt == m) {
+            // 선택된 모든 조합에 대해 이동 횟수를 계산합니다.
+            ans = Math.min(ans, calc());
+            return;
+        }
+    
+        if(currIdx == (int) coinPos.size()) 
+            return;
+    
+        // currIdx index 에 있는 동전을 선택하지 않은 경우
+        findMinMoves(currIdx + 1, cnt);
+        
+        // currIdx index 에 있는 동전을 선택한 경우
+        selectedPos.add(coinPos.get(currIdx));
+        findMinMoves(currIdx + 1, cnt + 1);
+        selectedPos.remove(selectedPos.size() - 1);
+    }
 
-		f(0);
-		if (ans == Integer.MAX_VALUE)
-			ans = -1;
-		System.out.println(ans);
-	}
-
-	public static void f(int prevNum) {
-		for (int i = prevNum + 1; i <= 9; i++) {
-			if (numRow[i] == -1)
-				continue;
-
-			list.add(i);
-			//이동 거리 계산
-			if (list.size() >= 3)
-				ans = Math.min(ans, getDist());
-			f(i);
-			list.remove(list.size() - 1);
-		}
-	}
-
-	public static int getDist() {
-		int dist = 0;
-
-		//start to 0원소와 거리계산 + size -1 원소와 end 거리 계산
-		int firstNum = list.get(0);
-		int firstNumRow = numRow[firstNum];
-		int firstNumCol = numCol[firstNum];
-		int lastNum = list.get(list.size() - 1);
-		int lastNumRow = numRow[lastNum];
-		int lastNumCol = numCol[lastNum];
-		dist += Math.abs(numRow[0] - firstNumRow) + Math.abs(numCol[0] - firstNumCol);
-		dist += Math.abs(numRow[10] - lastNumRow) + Math.abs(numCol[10] - lastNumCol);
-
-
-		for (int i = 0; i < list.size() - 1; i++) {
-			int a = list.get(i);
-			int b = list.get(i + 1);
-			dist += Math.abs(numRow[a] - numRow[b]) + Math.abs(numCol[a] - numCol[b]);
-		}
-
-		return dist;
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        
+        for(int i = 0; i < n; i++) {
+            String str = sc.next();
+            for(int j = 0; j < n; j++) {
+                grid[i][j] = str.charAt(j);
+                if(grid[i][j] == 'S')
+                    startPos = new Pair(i, j);
+                if(grid[i][j] == 'E')
+                    endPos = new Pair(i, j);
+            }
+        }
+        
+        // 동전을 오름차순으로 각 위치를 집어넣습니다.
+        // 이후에 증가하는 순서대로 방문하기 위함입니다.
+        for(int num = 1; num <= COIN_NUM; num++) 
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < n; j++)
+                    if(grid[i][j] == num + '0')
+                        coinPos.add(new Pair(i, j));
+        
+        findMinMoves(0, 0);
+        
+        if(ans == INT_MAX)
+            ans = -1;
+        
+        System.out.print(ans);
+    }
 }
