@@ -20,7 +20,7 @@ public class Main {
 		}
 
 		f(0, 0);
-		System.out.println((int) Math.pow(ans, 2));
+		System.out.println(Math.round(Math.pow(ans, 2)));
 	}
 
 	public static void f(int index, int cnt) {
