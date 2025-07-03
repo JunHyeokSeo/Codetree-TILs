@@ -15,8 +15,9 @@ public class Main {
 
 	public static void f(int curNum) {
 		if (curNum == n) {
-			for (Integer i : list)
-				System.out.print(i + " ");
+			for (int i = 0; i < list.size(); i++) {
+				System.out.print(list.get(i) + " ");
+			}
 			System.out.println();
 			return;
 		}
