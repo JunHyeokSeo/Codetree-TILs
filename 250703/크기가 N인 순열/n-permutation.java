@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 public class Main {
 	static int n;
+	static final int MAX_N = 8;
 	static List<Integer> list = new ArrayList<>();
-	static boolean[] visited;
+	static boolean[] visited = new boolean[MAX_N + 1];
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
-		visited = new boolean[n + 1];
 		f(0);
 	}
 
