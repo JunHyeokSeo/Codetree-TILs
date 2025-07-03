@@ -1,43 +1,35 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Scanner;
 public class Main {
-    public static final int MAX_N = 8;
-    
-    // 변수 선언
-    public static int n;
-    public static boolean[] visited = new boolean[MAX_N + 1];
-    public static ArrayList<Integer> picked = new ArrayList<>();
-    
-    // 지금까지 선택한 수의 개수를 cnt라 했을 때
-    // 계속 탐색을 이어서 진행합니다.
-    public static void getPermutation(int cnt) {
-        // 모든 원소를 선택했을 때, 해당 순열을 출력합니다.
-        if(cnt == n) {
-            for(int i = 0; i < picked.size(); i++)
-                System.out.print(picked.get(i) + " ");
-            System.out.println();
-            return;
-        }
-    
-        // 앞에서부터 하나씩 원소를 선택합니다.
-        for(int i = 1; i <= n; i++) {
-            if(visited[i]) continue;
-            visited[i] = true;
-            picked.add(i);
-    
-            getPermutation(cnt + 1);
-    
-            visited[i] = false;
-            picked.remove(picked.size() - 1);
-        }
-    }
+	static int n;
+	static List<Integer> list = new ArrayList<>();
+	static boolean[] visited;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        // 입력:
-        n = sc.nextInt();
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		visited = new boolean[n + 1];
+		f(0);
+	}
 
-        getPermutation(0);
-    }
+	public static void f(int curNum) {
+		if (curNum == n) {
+			for (Integer i : list)
+				System.out.print(i + " ");
+			System.out.println();
+			return;
+		}
+
+		for (int i = 1; i <= n; i++) {
+			if (visited[i])
+				continue;
+
+			visited[i] = true;
+			list.add(i);
+			f(curNum + 1);
+			list.remove(list.size() - 1);
+			visited[i] = false;
+		}
+	}
 }
