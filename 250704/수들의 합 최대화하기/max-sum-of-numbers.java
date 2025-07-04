@@ -23,8 +23,8 @@ public class Main {
 	public static void f(int row) {
 		if (row == n) {
 			int sum = 0;
-			for (int row = 0; row < n; row++) {
-				sum += grid[row][colByRow[row]];
+			for (int r = 0; r < n; r++) {
+				sum += grid[r][colByRow[r]];
 			}
 
 			ans = Math.max(ans, sum);
