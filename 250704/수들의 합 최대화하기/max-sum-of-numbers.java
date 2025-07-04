@@ -22,7 +22,12 @@ public class Main {
 
 	public static void f(int row) {
 		if (row == n) {
-			getSum();
+			int sum = 0;
+			for (int row = 0; row < n; row++) {
+				sum += grid[row][colByRow[row]];
+			}
+
+			ans = Math.max(ans, sum);
 			return;
 		}
 
@@ -35,14 +40,5 @@ public class Main {
 			f(row + 1);
 			visitedCol[col] = false;
 		}
-	}
-
-	public static void getSum() {
-		int sum = 0;
-		for (int row = 0; row < n; row++) {
-			sum += grid[row][colByRow[row]];
-		}
-
-		ans = Math.max(ans, sum);
 	}
 }
