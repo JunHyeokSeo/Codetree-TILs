@@ -21,24 +21,24 @@ public class Main {
 		}
 
 		per.add(0);
-		f(1, 0);
+		f(1, 0, 0);
 		System.out.println(ans);
 	}
 
-	public static void f(int index, int costSum) {
+	public static void f(int index, int costSum, int prevIdx) {
 		if (index == n) {
-			ans = Math.min(ans, costSum + cost[per.get(per.size() - 1)][0]);
+			if (cost[prevIdx][0] != 0)
+				ans = Math.min(ans, costSum + cost[prevIdx][0]);
 			return;
 		}
 
 		for (int i = 1; i < n; i++) {
-			int prevIdx = per.get(per.size() - 1);
 			if (visited[i] || cost[prevIdx][i] == 0)
 				continue;
 
 			visited[i] = true;
 			per.add(i);
-			f(index + 1, costSum + cost[prevIdx][i]);
+			f(index + 1, costSum + cost[prevIdx][i], i);
 			per.remove(per.size() - 1);
 			visited[i] = false;
 		}
