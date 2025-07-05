@@ -32,10 +32,10 @@ public class Main {
 		}
 
 		for (int i = 1; i < n; i++) {
-			if (visited[i])
+			int prevIdx = per.get(per.size() - 1);
+			if (visited[i] || cost[prevIdx][i] == 0)
 				continue;
 
-			int prevIdx = per.get(per.size() - 1);
 			visited[i] = true;
 			per.add(i);
 			f(index + 1, costSum + cost[prevIdx][i]);
