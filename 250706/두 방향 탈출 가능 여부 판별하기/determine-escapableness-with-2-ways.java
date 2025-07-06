@@ -2,7 +2,6 @@ import java.util.Scanner;
 public class Main {
 	public static int n;
 	public static int m;
-	public static int ans = 0;
 	public static int[][] grid;
 	public static int[] x = {0, 1};
 	public static int[] y = {1, 0};
@@ -16,20 +15,21 @@ public class Main {
 				grid[i][j] = sc.nextInt();
 
 		dfs(0, 0);
-		System.out.println(ans);
+		System.out.println(0);
 	}
 
 	public static void dfs(int row, int col) {
+		if (row == n - 1 && col == m - 1) {
+			System.out.println(1);
+			System.exit(0);
+		}
+
 		for (int i = 0; i < 2; i++) {
 			int nextRow = row + y[i];
 			int nextCol = col + x[i];
 
 			if (canGo(nextRow, nextCol)) {
-				grid[row][col] = 0;
-				if (nextRow == n - 1 && nextCol == m - 1)
-					ans = 1;
 				dfs(nextRow, nextCol);
-				grid[row][col] = 1;
 			}
 		}
 	}
