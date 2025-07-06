@@ -1,4 +1,8 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class Main {
 	public static int n;
 	public static int m;
@@ -6,15 +10,22 @@ public class Main {
 	public static int[][] visited;
 	public static int[] x = {0, 1};
 	public static int[] y = {1, 0};
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		m = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer tokens = new StringTokenizer(reader.readLine());
+
+		n = Integer.parseInt(tokens.nextToken());
+		m = Integer.parseInt(tokens.nextToken());
+
 		grid = new int[n][m];
 		visited = new int[n][m];
-		for (int i = 0; i < n; i++)
-			for (int j = 0; j < m; j++)
-				grid[i][j] = sc.nextInt();
+
+		for (int i = 0; i < n; i++) {
+			tokens = new StringTokenizer(reader.readLine());
+			for (int j = 0; j < m; j++) {
+				grid[i][j] = Integer.parseInt(tokens.nextToken());
+			}
+		}
 
 		dfs(0, 0);
 		System.out.println(visited[n - 1][m - 1]);
