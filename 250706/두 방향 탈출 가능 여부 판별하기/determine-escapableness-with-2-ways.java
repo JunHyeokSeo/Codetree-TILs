@@ -14,11 +14,7 @@ public class Main {
 			for (int j = 0; j < m; j++)
 				grid[i][j] = sc.nextInt();
 
-		if (grid[n - 1][m - 2] == 0 && grid[n - 2][m - 1] == 0) {
-			System.out.println(0);
-			System.exit(0);
-		}
-		
+
 		dfs(0, 0);
 		System.out.println(0);
 	}
@@ -34,6 +30,7 @@ public class Main {
 			int nextCol = col + x[i];
 
 			if (canGo(nextRow, nextCol)) {
+				grid[row][col] = 0;
 				dfs(nextRow, nextCol);
 			}
 		}
