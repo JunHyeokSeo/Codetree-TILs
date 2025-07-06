@@ -25,10 +25,11 @@ public class Main {
 			int nextCol = col + x[i];
 
 			if (canGo(nextRow, nextCol)) {
-				grid[nextRow][nextCol] = 0;
-				if (nextRow == n - 1 && nextCol == n - 1)
+				grid[row][col] = 0;
+				if (nextRow == n - 1 && nextCol == m - 1)
 					ans = 1;
 				dfs(nextRow, nextCol);
+				grid[row][col] = 1;
 			}
 		}
 	}
@@ -40,6 +41,6 @@ public class Main {
 	}
 
 	public static boolean inRange(int row, int col) {
-		return !(row < 0 || row > n - 1 || col < 0 || col > n - 1);
+		return !(row < 0 || row > n - 1 || col < 0 || col > m - 1);
 	}
 }
