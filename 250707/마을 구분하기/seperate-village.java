@@ -2,12 +2,12 @@ import java.util.*;
 
 public class Main {
 	static int n;
-	static int villageCnt = 0;
 	static int[] x = {0, 0, -1, 1};
 	static int[] y = {-1, 1, 0, 0};
 	static int[][] grid;
 	static boolean[][] visited;
-	static List<Integer> list = new ArrayList<>();
+	static int peopleNum;
+	static List<Integer> peopleNums = new ArrayList<>();
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -20,36 +20,31 @@ public class Main {
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				if (grid[i][j] == 0 || visited[i][j])
+				if (!canGo(i, j))
 					continue;
-
-				//사람
+				peopleNum = 1;
 				visited[i][j] = true;
-				dfs(villageCnt, i, j);
-				villageCnt++;
+				dfs(i, j);
+				peopleNums.add(peopleNum);
 			}
 		}
 
-		System.out.println(villageCnt);
-		Collections.sort(list);
-		for (Integer integer : list) {
+		System.out.println(peopleNums.size());
+		Collections.sort(peopleNums);
+		for (Integer integer : peopleNums) {
 			System.out.println(integer);
 		}
 	}
 
-	public static void dfs(int index, int row, int col) {
-		if (list.size() > index)
-			list.set(index, list.get(index) + 1);
-		else
-			list.add(1);
-
+	public static void dfs(int row, int col) {
 		for (int i = 0; i < 4; i++) {
 			int nextRow = row + y[i];
 			int nextCol = col + x[i];
 
 			if (canGo(nextRow, nextCol)) {
 				visited[nextRow][nextCol] = true;
-				dfs(index, nextRow, nextCol);
+				peopleNum++;
+				dfs(nextRow, nextCol);
 			}
 		}
 	}
