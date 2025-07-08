@@ -5,7 +5,7 @@ public class Main {
 	static int[][] grid;
 	static boolean[][] visited;
 	static int maxSafeAreaCnt = 0;
-	static int maxSafeAreaK = 0;
+	static int maxSafeAreaK = 1;
 	static final int MAX_HEIGHT = 100;
 	static int[] x = {0, 0, -1, 1};
 	static int[] y = {-1, 1, 0, 0};
@@ -21,7 +21,7 @@ public class Main {
 		for (int k = 1; k < MAX_HEIGHT; k++) {
 			int safeAreaCnt = 0;
 			visited = new boolean[n][m];
-			
+
 			for (int row = 0; row < n; row++) {
 				for (int col = 0; col < m; col++) {
 					if (!canGo(k, row, col))
