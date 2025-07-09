@@ -27,11 +27,9 @@ public class Main {
 				visited[row][col] = true;
 				dfs(grid[row][col], row, col);
 
-				if (currBlockSize < 4)
-					continue;
-
-				exploredBlockCnt++;
 				biggestBlockSize = Math.max(biggestBlockSize, currBlockSize);
+				if (currBlockSize >= 4)
+					exploredBlockCnt++;
 			}
 		}
 
