@@ -28,6 +28,7 @@ public class Main {
 		for (int i = 0; i < k; i++) {
 			moved = false;
 			visited = new boolean[n][n];
+			visited[r][c] = true;
 			currNum = 0;
 			strNum = grid[r][c];
 			queue.add(new Pair(r, c));
@@ -43,7 +44,6 @@ public class Main {
 	public static void bfs() {
 		while (!queue.isEmpty()) {
 			Pair currV = queue.poll();
-			visited[currV.row][currV.col] = true;
 
 			for (int i = 0; i < 4; i++) {
 				int nextRow = currV.row + y[i];
@@ -51,6 +51,7 @@ public class Main {
 
 				if (canGo(nextRow, nextCol)) {
 					queue.add(new Pair(nextRow, nextCol));
+					visited[currV.row][currV.col] = true;
 					updateJumpPoint(nextRow, nextCol);
 					moved = true;
 				}
