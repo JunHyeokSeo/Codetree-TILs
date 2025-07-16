@@ -58,17 +58,14 @@ public class Main {
 	}
 
 	public static int getBlockCnt() {
-		int blockCnt = 0;
 		initializing();
 		for (int i = 0; i < k; i++) {
 			int strRow = startPoints[i][0];
 			int strCol = startPoints[i][1];
-			if (canGo(strRow, strCol)) {
-				push(strRow, strCol);
-				blockCnt += bfs();
-			}
+			push(strRow, strCol);
 		}
-		return blockCnt;
+		
+		return bfs();
 	}
 
 
