@@ -22,7 +22,7 @@ public class Main {
 		visited = new boolean[n][n];
 		step = new int[n][n];
 		visited[r1][c1] = true;
-		queue.add(new Pair(r1, c1));
+		queue.add(new Pair(c1, r1));
 		bfs();
 	}
 
