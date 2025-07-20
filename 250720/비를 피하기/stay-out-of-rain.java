@@ -6,14 +6,10 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-	static int n;
-	static int h;
-	static int m;
 	static int[] x = {0, 0, -1, 1};
 	static int[] y = {-1, 1, 0, 0};
-	static int[][] a;
-	static int[][] step;
-	static int[][] stepForPeople;
+	static int n, h, m;
+	static int[][] a, step, stepForPeople;
 	static boolean[][] visited;
 	static Queue<Pair> queue = new LinkedList<>();
 	public static void main(String[] args) throws IOException {
