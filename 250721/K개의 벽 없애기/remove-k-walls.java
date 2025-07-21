@@ -92,5 +92,20 @@ public class Main {
 		}
 	}
 
-	record Pair(int row, int col) {}
+	static class Pair {
+		int row, col;
+
+		public Pair(int row, int col) {
+			this.row = row;
+			this.col = col;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (!(obj instanceof Pair)) return false;
+			Pair other = (Pair) obj;
+			return row == other.row && col == other.col;
+		}
+	}
 }
