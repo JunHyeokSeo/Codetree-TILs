@@ -20,28 +20,30 @@ public class Main {
 	public static int bfs() {
 		while (!queue.isEmpty()) {
 			Pair currV = queue.poll();
-			if (currV.num == 1)
-				return currV.step;
-
-			if (currV.num < 1)
-				continue;
 
 			for (int i = 0; i < 4; i++) {
+				int nextStep = currV.step + 1;
+				int nextNum = currV.num;
 				switch (i) {
 					case 0:
-						push(currV.step + 1, currV.num - 1);
+						nextNum--;
 						break;
 					case 1:
-						push(currV.step + 1, currV.num + 1);
+						nextNum++;
 						break;
 					case 2:
-						if (currV.num % 2 == 0) push(currV.step + 1, currV.num / 2);
+						if (currV.num % 2 == 0) nextNum /= 2;
 						break;
 					case 3:
-						if (currV.num % 3 == 0) push(currV.step + 1, currV.num / 3);
+						if (currV.num % 3 == 0) nextNum /= 3;
 						break;
 					default:
 				}
+
+				if (nextNum == 1)
+					return nextStep;
+				if (nextNum > 1)
+					push(nextStep, nextNum);
 			}
 		}
 
