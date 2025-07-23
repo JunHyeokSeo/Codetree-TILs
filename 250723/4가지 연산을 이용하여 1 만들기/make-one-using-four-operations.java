@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	static int n;
+	static boolean[] visited = new boolean[1000001];
 	static Queue<Pair> queue = new LinkedList<>();
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -15,6 +16,7 @@ public class Main {
 
 	public static void push(int step, int num) {
 		queue.add(new Pair(step, num));
+		visited[num] = true;
 	}
 
 	public static int bfs() {
@@ -22,7 +24,7 @@ public class Main {
 			Pair currV = queue.poll();
 			if (currV.num == 1)
 				return currV.step;
-			
+
 			for (int i = 0; i < 4; i++) {
 				int nextStep = currV.step + 1;
 				int nextNum = currV.num;
@@ -36,15 +38,11 @@ public class Main {
 					case 2:
 						if (currV.num % 2 == 0) nextNum /= 2;
 						break;
-					case 3:
-						if (currV.num % 3 == 0) nextNum /= 3;
-						break;
 					default:
+						if (currV.num % 3 == 0) nextNum /= 3;
 				}
 
-				if (nextNum == 1)
-					return nextStep;
-				if (nextNum > 1)
+				if (!visited[nextNum])
 					push(nextStep, nextNum);
 			}
 		}
