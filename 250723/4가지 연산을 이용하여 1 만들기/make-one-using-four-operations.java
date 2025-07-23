@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	static int n;
-	static boolean[] visited = new boolean[1000001];
+	static boolean[] visited = new boolean[2000000];
 	static Queue<Pair> queue = new LinkedList<>();
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
