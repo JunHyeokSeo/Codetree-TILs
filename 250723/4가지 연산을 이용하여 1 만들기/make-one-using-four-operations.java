@@ -20,7 +20,9 @@ public class Main {
 	public static int bfs() {
 		while (!queue.isEmpty()) {
 			Pair currV = queue.poll();
-
+			if (currV.num == 1)
+				return currV.step;
+			
 			for (int i = 0; i < 4; i++) {
 				int nextStep = currV.step + 1;
 				int nextNum = currV.num;
