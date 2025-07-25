@@ -19,7 +19,7 @@ public class Main {
 
 	public static void dp(int n) {
 		for (int i = 4; i <= n; i++) {
-			tab[i] = tab[i - 2] + tab[i - 3];
+			tab[i] = (tab[i - 2] % 10007) + (tab[i - 3] % 10007);
 		}
 	}
 }
