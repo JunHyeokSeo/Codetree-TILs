@@ -6,9 +6,12 @@ public class Main {
 		int n = sc.nextInt();
 		dp = new long[n + 1];
 
+		dp[0] = 1;
 		dp[1] = 1;
-		for (int i = 2; i <= n; i++) {
-			dp[i] = dp[i - 1] * 3 - 1;
+		for (int node = 2; node <= n; node++) {
+			for (int root = 1; root <= node; root++) {
+				dp[node] += dp[root - 1] * dp[node - root];
+			}
 		}
 
 		System.out.println(dp[n]);
