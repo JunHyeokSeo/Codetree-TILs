@@ -6,15 +6,9 @@ public class Main {
 		int n = sc.nextInt();
 		dp = new long[n + 1];
 
-		if (n == 1) {
-			System.out.println(1);
-			return;
-		}
-
 		dp[1] = 1;
-		dp[2] = 2;
-		for (int i = 3; i <= n; i++) {
-			dp[i] = dp[i - 1] * 2 + 1;
+		for (int i = 2; i <= n; i++) {
+			dp[i] = dp[i - 1] * 3 - 1;
 		}
 
 		System.out.println(dp[n]);
